@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Model\Article;
 use App\Model\Base;
+use Session;
+use Cookie;
 use App\Model\Fitment;
 use App\Model\Image;
 use App\Model\Retrofit;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -24,11 +28,26 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(){
-    }
-
     public function login(){
         return view('admin.login');
+    }
+
+    public function sign_in(){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        if(empty($username) || empty($password)) splash('error','请输入用户名和密码');
+        if($username !== 'fanfan') splash('error','用户名错误');
+        if($password !== 'f53bafd8c2b602abca59e4c2854440d8') splash('error','密码错误');
+
+        Session::put('admin', 'fanfan');
+        Session::save();
+
+        $config = config('session');
+
+    //    $response = new Response();
+    //    $response->headers->setCookie( new Cookie( 'fffff', 'sdfadsf', time() + 60 * 120,  $config['path'], $config['domain'], $config['secure'], false ) );
+
+        splash('success','登陆成功');
     }
 
     public function base(){
@@ -74,7 +93,6 @@ class AdminController extends Controller
                 if($row['type'] == self::style_type) $style_list[$row['sign_id']] = $row['name'];
                 elseif($row['type'] == self::house_type ) $house_list[$row['sign_id']] = $row['name'];
             }
-
             $data['total'] = Fitment::count();
             $data['rows'] = Fitment::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
             foreach($data['rows'] as &$v){
@@ -159,7 +177,7 @@ class AdminController extends Controller
     public function save(){
         $t = $_REQUEST['t'];
         $id = empty($_REQUEST['id']) ? 0 : intval($_REQUEST['id']);
-print_r($_REQUEST);exit;
+
         if($t == 'base'){
             $data['name'] = trim($_REQUEST['name']);
             $data['sort'] = trim($_REQUEST['sort']);
@@ -175,6 +193,7 @@ print_r($_REQUEST);exit;
             $data['price'] = trim($_REQUEST['price']);
             if(empty($id)) $res = $id = Fitment::insertGetId($data);
             else $res = Fitment::where('rec_id', $id)->update($data);
+            $this->save_fitment_img($id);
         }elseif($t == 'retrofit'){
             $data['title'] = trim($_REQUEST['title']);
             $data['type'] = trim($_REQUEST['type']);
@@ -200,6 +219,38 @@ print_r($_REQUEST);exit;
         }else{
             splash('error','保存失败,请重试');
         }
+    }
+
+    public function save_fitment_img($rec_id){
+        $new_img_list = $_REQUEST['img_list'];
+        $old_img_res = Image::where("rec_id",$rec_id)->orderBy('sort', 'desc')->get()->toArray();
+        $old_img_list = $new_img_ids = $old_img_ids = array();
+
+        foreach($old_img_res as $old){
+            $old_img_ids[] = $old['img_id'];
+            $old_img_list[$old['img_id']] = $old;
+        }
+
+        foreach($new_img_list as $row){
+            if(empty($row[0])){
+                //新增
+                Image::insert(array('rec_id'=>$rec_id,'img_url'=>$row[1],'sort'=>$row[2],'create_time'=>date('Y-m-d H:i:s')));
+            }else{
+                //更新
+                $new_img_ids[] = $row[0];
+                if(($row[1] != $old_img_list[$row[0]]['img_url']) && ($row[2] != $old_img_list[$row[0]]['sort'])){
+                    Image::where('rec_id', $row[0])->update(array('img_url'=>$row[1],'sort'=>$row[2]));
+                }elseif(($row[1] != $old_img_list[$row[0]]['img_url']) && ($row[2] == $old_img_list[$row[0]]['sort'])){
+                    Image::where('rec_id', $row[0])->update(array('img_url'=>$row[1]));
+                }elseif(($row[1] == $old_img_list[$row[0]]['img_url']) && ($row[2] != $old_img_list[$row[0]]['sort'])){
+                    Image::where('rec_id', $row[0])->update(array('sort'=>$row[2]));
+                }
+            }
+        }
+
+        $diff_ids = array_diff($old_img_ids,$new_img_ids);
+        if(!empty($diff_ids))   Image::whereIn('img_id', $diff_ids)->delete();
+
     }
 
 }

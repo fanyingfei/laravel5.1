@@ -36,6 +36,7 @@ button{
 }
 body.login{
     background-color: #fafafa;
+    height: auto !important;
 }
 .login_m {
     width: 403px;

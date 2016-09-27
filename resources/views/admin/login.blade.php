@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/admin.css"/>
     <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/admin.js"></script>
+    <script type="text/javascript" src="/js/jquery.md5.js"></script>
 </head>
 
 <body class="login">
@@ -31,8 +31,35 @@
                 </div>
                 <label><div class="sub_button">SIGN-IN</div></label>
             </div>
+            <input id="token" type="hidden" value="{{ csrf_token() }}" >
         </div>
     </div>
 </div>
+<script>
+$(function(){
+    $('.sub_button').click(function(){
+        var username = $('#username').val();
+        var password = $.md5($('#userpwd').val());
+        var remember = $('#save_me').is(':checked');
+        remember =  remember  ? 1 : 0;
+        var token = $('#token').val();
+        $.ajax({
+            url:'/admin/sign_in',
+            data:{'username':username,'password':password,'remember':remember},
+            type:'post',
+            dataType:'json',
+            headers:{'X-CSRF-TOKEN':token},
+            success:function(obj){
+                if(obj.status == 'success'){
+                    window.location.href = '/admin';
+                }else{
+                    alert(obj.msg);
+                }
+            },
+            error:function (){}
+        })
+    })
+});
+</script>
 </body>
 </html>
