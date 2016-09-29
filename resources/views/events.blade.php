@@ -23,3 +23,23 @@
         </div>
     </div>
 @stop
+
+@section('script')
+<script>
+$(function(){
+    fixed_left();
+	window.onscroll = function(){
+        fixed_left();
+    }
+	function fixed_left(){
+	    var scroll_height = $(window).scrollTop();
+	    var top_height = $('.events-list').offset().top;
+        if(scroll_height >top_height){
+            $('.events-side').addClass('events-fixed');
+        }else{
+            $('.events-side').removeClass('events-fixed');
+        }
+	}
+});
+</script>
+@stop

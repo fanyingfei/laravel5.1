@@ -16,6 +16,7 @@ class MainController extends Controller
     const banner_type = 0;   //轮播
     const style_type = 1;  //风格
     const house_type = 2;  //户型
+    const space_type = 3;  //空间
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +24,7 @@ class MainController extends Controller
      */
     public function index()
     {
-        $articles_res = Article::select('rec_id as id','title')->orderBy('rec_id', 'desc')->take(10)->get()->toArray();
+        $articles_res = Article::select('rec_id as id','title')->orderBy('sort', 'desc')->take(10)->get()->toArray();
         $base_res = Base::whereIn('type', array(self::banner_type , self::style_type))->orderBy('sort', 'desc')->get()->toArray();
         $banner_list = $case_list = array();
         foreach($base_res as $row){
@@ -105,7 +106,7 @@ class MainController extends Controller
             $list_res = Article::select('rec_id as id','title','title_img','create_time')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }else{
             $total_count = Article::where('type', $type)->count();
-            $list_res = Article::select('rec_id as id','title','title_img','create_time')->where('type', $type)->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            $list_res = Article::select('rec_id as id','title','title_img','create_time')->where('type', $type)->orderBy('create_time', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }
         foreach($list_res as &$row){
             $row['create_time'] = substr($row['create_time'],0,10);
@@ -113,7 +114,7 @@ class MainController extends Controller
         $pagination = GetPage($total_count,$limit,$p);
 
         $data['body'] = 'events';
-        $data['title'] = '新闻动态';
+        $data['title'] = '动态资讯';
         $data['keywords'] = '';
         $data['description'] = '';
         $data['pagination'] = $pagination;
@@ -202,6 +203,7 @@ class MainController extends Controller
             $row['img_num'] = count($images_list[$row['rec_id']]);
             $row['img_url'] = $images_list[$row['rec_id']][0]['img_url'];
             $row['style'] = empty($fitment_list[$row['style']]) ? '' : $fitment_list[$row['style']]['name'];
+            $row['style'] = $row['style'] == '其他' ? '' : $row['style'];
             $row['house'] = empty($house_list[$row['house']]) ? '' : $house_list[$row['house']]['name'];
         }
 
@@ -227,6 +229,13 @@ class MainController extends Controller
 
     public function retrofit_other(){
         $data = $this->out_retrofit('other');
+        $space_res = Base::select('name','sign_id')->where('type', self::space_type)->get()->toArray();
+        $space_list = array_column($space_res,'name','sign_id');
+        foreach($data['list'] as &$row){
+            $type_name = empty($space_list[$row['type']]) ? '' : '【'.$space_list[$row['type']].'】';
+            $type_name = $type_name == '【其他】' ? '' : $type_name;
+            $row['title'] = $type_name.$row['title'];
+        }
         return view('retrofit.other')->with('data', $data);
     }
 
@@ -240,9 +249,9 @@ class MainController extends Controller
         if($p > 0) $p--;
         $total_count = Retrofit::count();
         if($curr == 'wall'){
-            $list = Retrofit::where("type",$curr)->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            $list = Retrofit::where("type",0)->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }else{
-            $list = Retrofit::where("type",'!=','wall')->orderBy('type', 'desc')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            $list = Retrofit::where("type",'>',0)->orderBy('type', 'asc')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }
         $pagination = GetPage($total_count,$limit,$p,'ajax_page');
 

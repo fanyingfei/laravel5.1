@@ -10,9 +10,13 @@
                 <label>类型：</label>
                 <select class="form-control" id="e_type">
                     <option @if ( $info['type'] == 0 ) selected @endif value="0">请选择</option>
-                    <option @if ( $info['type'] == 1 ) selected @endif value="1">活动</option>
+                    <option @if ( $info['type'] == 1 ) selected @endif value="1">动态</option>
                     <option @if ( $info['type'] == 2 ) selected @endif value="2">咨讯</option>
                 </select>
+            </div>
+            <div  class="form-group">
+                <label>权重：</label>
+                <input type="text" class="form-control" id="e_sort" value="{{ $info['sort'] }}">
             </div>
             <div  class="form-group">
                 <label>关键词：</label>
@@ -50,16 +54,17 @@
 $(function(){
     KindEditor.ready(function(K) {
         window.editor = K.create('#content', {
-            newlineTag : "br" ,
+            newlineTag : "p" ,
             itemsName : true,
             //   items : [ 'image' , 'link' ,'emoticons']
-            items : ['formatblock','fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'image']
+            items : ['source','formatblock','fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'image','emoticons']
         });
     });
 
     $('.submit').click(function(){
         var id = $('#e_id').val();
         var title = $('#e_title').val();
+        var sort = $('#e_sort').val();
         var type = $('#e_type').val();
         var keywords = $('#e_keywords').val();
         var description = $('#e_description').val();
@@ -69,14 +74,14 @@ $(function(){
         var token = $('#token').val();
         $.ajax({
             url:'/admin/save',
-            data:{'title':title,'type':type,'keywords':keywords,'description':description,'create_time':create_time,'title_img':title_img,'content':content,'create_time':create_time,'id':id,'t':'event'},
+            data:{'title':title,'type':type,'sort':sort,'keywords':keywords,'description':description,'create_time':create_time,'title_img':title_img,'content':content,'create_time':create_time,'id':id,'t':'event'},
             type:'post',
             dataType:'json',
             headers:{'X-CSRF-TOKEN':token},
             success:function(obj){
                 alert(obj.msg);
                 if(obj.status == 'success'){
-                    window.location.href = window.location.href;
+                    window.location.href = '/admin/edit?t=event&id='+obj.data;
                 }
             },
             error:function (){}

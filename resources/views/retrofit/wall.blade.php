@@ -23,19 +23,19 @@
         <h4>刷新项目</h4>
         <div class="cat-list">
             <div style="background-color:#995c49;">
-                <div class="cat-img"><img src="/img/retrofit/p03.jpg" /></div>
+                <div class="cat-img"><img src="http://ww1.sinaimg.cn/mw690/ce768b7ajw1f89oy24oygj20a006f0ta.jpg" /></div>
                 <div class="cat-content">焕新墙面颜色</div>
             </div>
             <div style="background-color:#518db4;">
-                <div class="cat-img"><img src="/img/retrofit/p01.jpg" /></div>
+                <div class="cat-img"><img src="http://ww1.sinaimg.cn/mw690/ce768b7ajw1f89oq3pbk4j206a0563yg.jpg" /></div>
                 <div class="cat-content">解决墙面问题</div>
             </div>
             <div style="background-color:#5e9e84;">
-                <div class="cat-img"><img src="/img/retrofit/p02.jpg" /></div>
+                <div class="cat-img"><img src="http://ww2.sinaimg.cn/mw690/ce768b7agw1f89p32vpcdj20b3077mxp.jpg" /></div>
                 <div class="cat-content">翻新木质家具</div>
             </div>
             <div style="background-color:#5099c3;">
-                <div class="cat-img"><img src="/img/retrofit/p04.jpg" /></div>
+                <div class="cat-img"><img src="http://ww1.sinaimg.cn/mw690/ce768b7agw1f89p6vcjcxj20o40fen3b.jpg" /></div>
                 <div class="cat-content">外墙刷新</div>
             </div>
         </div>
@@ -74,14 +74,17 @@
             </div>
         </div>
     </div>
-    <table class="wall-price f-content"  border="1" cellpadding="3">
+    <div class="f-content">
+    <p class="p-price"><strong>修补型：</strong>&nbsp;&nbsp;60/㎡<span>包含：人工 25/㎡</span><span>辅材 15/㎡</span><span>涂料 20/㎡</span></p>
+    <p class="p-price"><strong>铲除型：</strong>100/㎡<span>包含：人工 45/㎡</span><span>辅材 35/㎡</span><span>涂料 20/㎡</span></p>
+    <table class="wall-price"  border="1" cellpadding="3">
         <tr class="table-th">
             <td width="60">编号</td>
             <td width="350">服务内容</td>
             <td width="75">单位</td>
             <td width="110">单价（元）</td>
             <td width="150">最低收费（元）</td>
-            <td width="435">服务说明</td>
+            <td width="415">服务说明</td>
         </tr>
         <tr>
             <td>1</td>
@@ -260,4 +263,5 @@
             <td>施工前进行家具搬移和遮蔽保护;免费服务</td>
         </tr>
     </table>
+    </div>
 @stop

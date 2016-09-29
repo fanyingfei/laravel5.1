@@ -64,4 +64,17 @@ $(function(){
 
     window.onresize=function(){footer_bottom();}
 
+    //监听到顶部点击事件
+    $("#top").click(function(){
+        $('html,body').animate({scrollTop: 0}, 500);
+    })
+
+    //监听滚动条滚动事件
+    $(window).scroll(function(){
+        if($(window).scrollTop() >$(window).height()/2){
+            $("#top").show();
+        }else{
+            $("#top").hide();
+        }
+    });
 });

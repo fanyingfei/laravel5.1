@@ -33,6 +33,7 @@
 <script>
 $(function(){
     $('.fitment-img').click(function(){
+        var cur_index = $(this).parent().index();
 	    var html = '<div id="slider1_container"><div u="loading" class="f-loading">';
 	    html += '<div class="f-loading-one"></div><div class="f-loading-two"></div></div>';
 	    html += '<div u="slides" class="sildes-container">';
@@ -48,6 +49,7 @@ $(function(){
         $('.modal-container').html(html);
 	    $('.modal-bg').show();
 	    jssor_init();
+	    $('.slide-'+cur_index+' .w img').trigger('click');
 	})
 
 	$('.modal-bg').click(function(){

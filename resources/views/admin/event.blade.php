@@ -21,8 +21,8 @@
             <th data-sortable="true" data-field="rec_id">ID</th>
             <th data-field="title">标题</th>
             <th data-sortable="true" data-field="type">类型</th>
+            <th data-sortable="true" data-field="sort">权重</th>
             <th data-field="keywords">关键词</th>
-            <th data-field="description">描述</th>
             <th data-field="title_img">图片</th>
             <th data-field="create_time">时间</th>
             <th data-field="op">操作</th>

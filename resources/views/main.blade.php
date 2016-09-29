@@ -31,7 +31,7 @@
         @yield('content')
     </div>
     <div class="footer">
-
+        <div id="top"></div>
     </div>
 </body>
 @yield('script')

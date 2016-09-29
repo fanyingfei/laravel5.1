@@ -20,7 +20,7 @@ class AdminController extends Controller
     const banner_type = 0;   //轮播
     const style_type = 1;  //风格
     const house_type = 2;  //户型
-    private $type_list = array('wall'=>'墙面','room'=>'客厅','bathroom'=>'卫生间','kitchen'=>'厨房','other'=>'其他');
+    const space_type = 3;  //空间
 
     /**
      * Display a listing of the resource.
@@ -85,6 +85,7 @@ class AdminController extends Controller
                 if($v['type'] == self::banner_type) $v['type'] = '轮播';
                 elseif($v['type'] == self::style_type) $v['type'] = '风格';
                 elseif($v['type'] == self::house_type) $v['type'] = '户型';
+                elseif($v['type'] == self::space_type) $v['type'] = '空间';
             }
         }elseif($t == 'fitment'){
             $base_res = Base::select('name','sign_id','type')->whereIn('type', array(self::style_type ,self::house_type))->orderBy('sort', 'desc')->get()->toArray();
@@ -101,13 +102,14 @@ class AdminController extends Controller
                 $v['house'] = $house_list[$v['house']];
             }
         }elseif($t == 'retrofit'){
-            $type_list = $this->type_list;
+            $space_res = Base::select('name','sign_id')->where('type', self::space_type)->get()->toArray();
+            $space_list = array_column($space_res,'name','sign_id');
 
             $data['total'] = Retrofit::count();
             $data['rows'] = Retrofit::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
             foreach($data['rows'] as &$v){
                 $v['op'] = '<a class="edit-btn" href="/admin/edit?t=retrofit&id='.$v['rec_id'].'">编辑</a>';
-                $v['type'] = empty($type_list[$v['type']]) ? '其他' : $type_list[$v['type']];
+                $v['type'] = empty($space_list[$v['type']]) ? '其他' : $space_list[$v['type']];
             }
         }elseif($t == 'event'){
             $data['total'] = Article::count();
@@ -140,18 +142,19 @@ class AdminController extends Controller
             else $result = array('rec_id'=>0,'title'=>'','type'=>'other','img_url'=>'');
         }elseif($t == 'event'){
             if($id) $result = Article::where("rec_id",$id)->first();
-            else $result = array('rec_id'=>0,'title'=>'','type'=>0,'title_img'=>'','keywords'=>'','description'=>'','create_time'=>date('Y-m-d H:i:s'),'content'=>'');
+            else $result = array('rec_id'=>0,'title'=>'','type'=>0,'sort'=>0,'title_img'=>'','keywords'=>'','description'=>'','create_time'=>date('Y-m-d H:i:s'),'content'=>'');
         }else{
             return view('errors.503');
         }
 
-        $base_res = Base::select('name','sign_id','type')->whereIn('type', array(self::style_type ,self::house_type))->orderBy('sort', 'desc')->get()->toArray();
-        $house_list = $style_list = array();
+        $base_res = Base::select('name','sign_id','type')->whereIn('type', array(self::style_type ,self::house_type,self::space_type))->orderBy('sort', 'desc')->get()->toArray();
+        $house_list = $style_list = $space_list = array();
         foreach($base_res as $row){
             if($row['type'] == self::style_type) $style_list[$row['sign_id']] = $row['name'];
             elseif($row['type'] == self::house_type ) $house_list[$row['sign_id']] = $row['name'];
+            elseif($row['type'] == self::space_type ) $space_list[$row['sign_id']] = $row['name'];
         }
-        $data = array('curr'=>$t,'style_list'=>$style_list,'house_list'=>$house_list,'type_list'=>$this->type_list);
+        $data = array('curr'=>$t,'style_list'=>$style_list,'house_list'=>$house_list,'type_list'=>$space_list);
         return view('admin.'.$t.'_edit')->with(['data'=>$data,'info'=>$result]);
     }
 
@@ -203,6 +206,7 @@ class AdminController extends Controller
         }elseif($t == 'event'){
             $data['title'] = trim($_REQUEST['title']);
             $data['type'] = intval($_REQUEST['type']);
+            $data['sort'] = intval($_REQUEST['sort']);
             $data['keywords'] = trim($_REQUEST['keywords']);
             $data['description'] = trim($_REQUEST['description']);
             $data['create_time'] = trim($_REQUEST['create_time']);
@@ -239,11 +243,11 @@ class AdminController extends Controller
                 //更新
                 $new_img_ids[] = $row[0];
                 if(($row[1] != $old_img_list[$row[0]]['img_url']) && ($row[2] != $old_img_list[$row[0]]['sort'])){
-                    Image::where('rec_id', $row[0])->update(array('img_url'=>$row[1],'sort'=>$row[2]));
+                    Image::where('img_id', $row[0])->update(array('img_url'=>$row[1],'sort'=>$row[2]));
                 }elseif(($row[1] != $old_img_list[$row[0]]['img_url']) && ($row[2] == $old_img_list[$row[0]]['sort'])){
-                    Image::where('rec_id', $row[0])->update(array('img_url'=>$row[1]));
+                    Image::where('img_id', $row[0])->update(array('img_url'=>$row[1]));
                 }elseif(($row[1] == $old_img_list[$row[0]]['img_url']) && ($row[2] != $old_img_list[$row[0]]['sort'])){
-                    Image::where('rec_id', $row[0])->update(array('sort'=>$row[2]));
+                    Image::where('img_id', $row[0])->update(array('sort'=>$row[2]));
                 }
             }
         }

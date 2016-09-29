@@ -15,7 +15,7 @@
                 <div class="events-info">
                     <p class="title"><a>{{ $info['title'] }}</a></p>
                     <p class="events-more"><span>{{ $info['create_time'] }}</span></p>
-                    <div class="content">{{ $info['content'] }}</div>
+                    <div class="content">{!! $info['content'] !!}</div>
                 </div>
             </div>
         </div>

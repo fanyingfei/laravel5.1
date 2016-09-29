@@ -1763,6 +1763,7 @@ new function () {
 
                 $JssorDebug$.$Execute(function () {
                     $Jssor$.$Attribute(_Wrapper, "debug-id", "slide-" + slideIndex);
+                    $Jssor$.$Attribute(_Wrapper, "class", "slide-" + slideIndex);
                 });
             }
         }
