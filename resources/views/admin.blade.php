@@ -21,6 +21,7 @@
             <li @if ( $data['curr'] == 'base') class="cur-nav" @endif><a href="/admin/base">首页数据</a></li>
             <li @if ( $data['curr'] == 'fitment') class="cur-nav" @endif><a href="/admin/fitment">整体装修</a></li>
             <li @if ( $data['curr'] == 'retrofit') class="cur-nav" @endif><a href="/admin/retrofit">室内翻新</a></li>
+            <li @if ( $data['curr'] == 'floor') class="cur-nav" @endif><a href="/admin/floor">木质地板</a></li>
             <li @if ( $data['curr'] == 'event') class="cur-nav" @endif><a href="/admin/event">动态咨询</a></li>
         </ul>
     </div>

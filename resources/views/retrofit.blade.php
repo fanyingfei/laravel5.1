@@ -3,10 +3,11 @@
 @section('content')
     <div class="retrofit-bg crumb-bg"></div>
     <div class="retrofit-wrapper">
-        <ul class="retrofit-tab tab-href">
+        <ul class="retrofit-tab">
             <li>服务项目：</li>
             <li><a @if ( $data['curr'] == 'wall') class="curr" @endif href="/retrofit">刷新服务</a></li>
             <li><a @if ( $data['curr'] == 'other') class="curr" @endif href="/retrofit/other">其他服务</a></li>
+            <li><a href="javascript:bespeak()">立即预约</a></li>
         </ul>
         @yield('retrofit-info')
         <div class="tab-content">
@@ -25,8 +26,6 @@
 @stop
 
 @section('script')
-<div class="modal-bg"></div>
-<div class="modal-container"></div>
 <script type="text/javascript" src="/js/jssor.js"></script>
 <script type="text/javascript" src="/js/jssor.slider.js"></script>
 <script type="text/javascript" src="/js/jssor.example.js"></script>
@@ -34,7 +33,8 @@
 $(function(){
     $('.fitment-img').click(function(){
         var cur_index = $(this).parent().index();
-	    var html = '<div id="slider1_container"><div u="loading" class="f-loading">';
+        var html = '<div class="modal-container"><p class="close">×</p>';
+	    html += '<div id="slider1_container"><div u="loading" class="f-loading">';
 	    html += '<div class="f-loading-one"></div><div class="f-loading-two"></div></div>';
 	    html += '<div u="slides" class="sildes-container">';
         $('.fitment-img img').each(function(k,v){
@@ -45,17 +45,12 @@ $(function(){
 	    html += '<div u="thumbnavigator" class="jssort01">';
 	    html += '<div u="slides" class="f-slides"><div u="prototype" class="p">';
         html += '<div class=w><div u="thumbnailtemplate"></div></div>';
-        html += '<div class=c></div></div></div></div></div>';
-        $('.modal-container').html(html);
-	    $('.modal-bg').show();
+        html += '<div class=c></div></div></div></div></div></div>';
+        $('.modal-bg').html(html);
 	    jssor_init();
+	    $('.modal-bg').show();
 	    $('.slide-'+cur_index+' .w img').trigger('click');
 	})
-
-	$('.modal-bg').click(function(){
-        $('.modal-bg').hide();
-        $('.modal-container').html('');
-    })
 });
 
 function ajax_page(p){

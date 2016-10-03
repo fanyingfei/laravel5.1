@@ -8,6 +8,8 @@ use App\Model\Base;
 use App\Model\Fitment;
 use App\Model\Image;
 use App\Model\Retrofit;
+use App\Model\Bespeak;
+use App\Model\Floor;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -64,16 +66,23 @@ class MainController extends Controller
         return view('about')->with('data', $data);
     }
 
-    public function bespeak(){
-        $data['body'] = 'bespeak';
-        $data['title'] = '预约留言';
-        $data['keywords'] = '';
-        $data['description'] = '';
-        return view('bespeak')->with('data', $data);
-    }
-
     public function bespeak_save(){
-        echo 333;exit;
+        $data['name'] = $name = trim($_POST['name']);
+        $data['mobile'] = $mobile = intval($_POST['mobile']);
+        $data['address'] = $address = trim($_POST['address']);
+        $data['remark'] = $remark = trim($_POST['remark']);
+        $data['create_time'] = date('Y-m-d H:i:s');
+
+        if(empty($name) || empty($mobile) || empty($address)) splash('error','请填写完整信息');
+        if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
+
+        $res = Bespeak::insertGetId($data);
+
+        if($res){
+            splash('success','预约成功');
+        }else{
+            splash('error','预约失败,请重试');
+        }
     }
 
     public function events($p = 0){
@@ -222,9 +231,31 @@ class MainController extends Controller
         return $data;
     }
 
+    public function floor(){
+        $list_res = Floor::where("type",1)->orderBy('rec_id', 'asc')->get()->toArray();
+        $data['list'] = $list_res;
+        $data['body'] = 'floor';
+        $data['curr'] = 'hot';
+        $data['title'] = '地板';
+        $data['keywords'] = '';
+        $data['description'] = '';
+        return view('childs.hot')->with('data', $data);
+    }
+
+    public function floor_general(){
+        $list_res = Floor::where("type",0)->orderBy('rec_id', 'asc')->get()->toArray();
+        $data['list'] = $list_res;
+        $data['body'] = 'floor';
+        $data['curr'] = 'common';
+        $data['title'] = '地板';
+        $data['keywords'] = '';
+        $data['description'] = '';
+        return view('childs.general')->with('data', $data);
+    }
+
     public function retrofit(){
         $data = $this->out_retrofit();
-        return view('retrofit.wall')->with('data', $data);
+        return view('childs.wall')->with('data', $data);
     }
 
     public function retrofit_other(){
@@ -236,7 +267,22 @@ class MainController extends Controller
             $type_name = $type_name == '【其他】' ? '' : $type_name;
             $row['title'] = $type_name.$row['title'];
         }
-        return view('retrofit.other')->with('data', $data);
+        return view('childs.other')->with('data', $data);
+    }
+
+    public function quality_query(){
+        $mobile = intval($_POST['mobile']);
+        if(empty($mobile)) splash('error','请输入手机号');
+        if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
+
+      //  $res = Bespeak::where(['mobile'=>$mobile,'type'=>1])->get()->toArray();
+        $res[0] = array('keep_time'=>'asdfasdfasdf');
+        $res[1] = array('keep_time'=>'bbbbbbbbbbb');
+        if($res){
+            splash('success','',$res);
+        }else{
+            splash('error','没有查询结果');
+        }
     }
 
     public function retrofit_page($curr , $p){

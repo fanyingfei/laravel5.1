@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-    <div class="retrofit-bg crumb-bg"></div>
+    <div class="faq-bg crumb-bg"></div>
     <div class="faq-wrapper">
         <div class="faq-list">
             <div class="faq-row">

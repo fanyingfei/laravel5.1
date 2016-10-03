@@ -36,8 +36,8 @@
         </div>
         <div class="index-events">
             <div class="indexdfl">
-                 <div class="dbt">最 新 动 态</div>
-                 <div class="more"><a href="/news">MORE >></a></div>
+                 <div class="dbt">动 态 资 讯</div>
+                 <div class="more"><a href="/events">MORE >></a></div>
             </div>
             <ul class="toplist">
                 @foreach ($data['article_list'] as $key=>$row)
@@ -52,6 +52,11 @@
 <script>
 $(function(){
 	$(".banner").swBanner();
+    $(".tag-bg .tab").click(function(){
+        $(this).addClass("current").siblings().removeClass("current");
+        var data_id = $(this).attr('data-id');
+        $("#tab-img-"+data_id).show(500).siblings().hide(500);
+    });
 	$(window).resize(function(){$(".banner").height($(".banList li img").height());});
 });
 </script>

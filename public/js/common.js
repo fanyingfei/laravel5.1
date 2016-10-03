@@ -38,12 +38,6 @@ $(function(){
         });
     }
 
-    $(".tag-bg .tab").click(function(){
-        $(this).addClass("current").siblings().removeClass("current");
-        var data_id = $(this).attr('data-id');
-        $("#tab-img-"+data_id).show(500).siblings().hide(500);
-    });
-
     $(".retrofit-info li").click(function(){
         $(this).children('a').addClass("curr").end().siblings().children('a').removeClass("curr");
         var index = $(this).index() - 1;
@@ -65,8 +59,40 @@ $(function(){
     window.onresize=function(){footer_bottom();}
 
     //监听到顶部点击事件
-    $("#top").click(function(){
-        $('html,body').animate({scrollTop: 0}, 500);
+    $("#top").click(function(){$('html,body').animate({scrollTop: 0}, 500);})
+
+    $('body').on('click', '.close', function(){$('.modal-bg').hide(); })
+
+    $('body').on('click', '.bespeak-submit', function(){
+        var name = $('.b-name').val();
+        var mobile = $('.b-mobile').val();
+        var address = $('.b-address').val();
+        var remark = $('.b-remark').val();
+        var token = $('#token').val();
+        if(!name || !mobile || !address){
+            alert('请填写完整信息');
+            return false;
+        }
+
+        if(!/^1[34578]\d{9}$/.test(mobile)){
+            alert('请输入正确手机号');
+            return false;
+        }
+
+        $.ajax({
+            url:'/bespeak/save',
+            data:{'mobile':mobile,'name':name,'address':address,'remark':remark},
+            type:'post',
+            dataType:'json',
+            headers:{'X-CSRF-TOKEN':token},
+            success:function(obj){
+                alert(obj.msg);
+                if(obj.status == 'success'){
+                    $('.modal-bg').hide();
+                }
+            },
+            error:function (){}
+        })
     })
 
     //监听滚动条滚动事件

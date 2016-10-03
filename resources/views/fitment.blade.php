@@ -37,8 +37,6 @@
 @stop
 
 @section('script')
-<div class="modal-bg"></div>
-<div class="modal-container"></div>
 <script type="text/javascript" src="/js/jssor.js"></script>
 <script type="text/javascript" src="/js/jssor.slider.js"></script>
 <script type="text/javascript" src="/js/jssor.example.js"></script>
@@ -65,7 +63,8 @@ $(function(){
 	})
 
 	function show_images(result){
-	    var html = '<div id="slider1_container"><div u="loading" class="f-loading">';
+	    var html = '<div class="modal-container"><p class="close">×</p>';
+	    html += '<div id="slider1_container"><div u="loading" class="f-loading">';
 	    html += '<div class="f-loading-one"></div><div class="f-loading-two"></div></div>';
 	    html += '<div u="slides" class="sildes-container">';
         $.each(result, function(k, v) {
@@ -76,16 +75,11 @@ $(function(){
 	    html += '<div u="thumbnavigator" class="jssort01">';
 	    html += '<div u="slides" class="f-slides"><div u="prototype" class="p">';
         html += '<div class=w><div u="thumbnailtemplate"></div></div>';
-        html += '<div class=c></div></div></div></div></div>';
-        $('.modal-container').html(html);
-        $('.modal-bg').show();
+        html += '<div class=c></div></div></div></div></div></div>';
+        $('.modal-bg').html(html);
         jssor_init();
+        $('.modal-bg').show();
 	}
-
-	$('.modal-bg').click(function(){
-        $('.modal-bg').hide();
-        $('.modal-container').html('');
-    })
 });
 </script>
 @stop

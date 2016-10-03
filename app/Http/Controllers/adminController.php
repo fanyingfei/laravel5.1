@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Session;
 use App\Model\Article;
 use App\Model\Base;
-use Session;
-use Cookie;
 use App\Model\Fitment;
 use App\Model\Image;
 use App\Model\Retrofit;
+use App\Model\Floor;
+use App\Model\Bespeak;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -65,6 +66,11 @@ class AdminController extends Controller
         return view('admin.retrofit')->with('data', $data);
     }
 
+    public function floor(){
+        $data['curr'] = 'floor';
+        return view('admin.floor')->with('data', $data);
+    }
+
     public function event(){
         $data['curr'] = 'event';
         return view('admin.event')->with('data', $data);
@@ -111,6 +117,13 @@ class AdminController extends Controller
                 $v['op'] = '<a class="edit-btn" href="/admin/edit?t=retrofit&id='.$v['rec_id'].'">编辑</a>';
                 $v['type'] = empty($space_list[$v['type']]) ? '其他' : $space_list[$v['type']];
             }
+        }elseif($t == 'floor'){
+            $data['total'] = Floor::count();
+            $data['rows'] = Floor::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
+            foreach($data['rows'] as &$v){
+                $v['op'] = '<a class="edit-btn" href="/admin/edit?t=floor&id='.$v['rec_id'].'">编辑</a>';
+                $v['type'] = empty($v['type']) ? '普通地板' : '自热地板';
+            }
         }elseif($t == 'event'){
             $data['total'] = Article::count();
             $data['rows'] = Article::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
@@ -127,6 +140,14 @@ class AdminController extends Controller
         $t = $_REQUEST['t'];
         $id = empty($_REQUEST['id']) ? 0 : intval($_REQUEST['id']);
 
+        $base_res = Base::select('name','sign_id','type')->whereIn('type', array(self::style_type ,self::house_type,self::space_type))->orderBy('sort', 'desc')->get()->toArray();
+        $house_list = $style_list = $space_list = array();
+        foreach($base_res as $row){
+            if($row['type'] == self::style_type) $style_list[$row['sign_id']] = $row['name'];
+            elseif($row['type'] == self::house_type ) $house_list[$row['sign_id']] = $row['name'];
+            elseif($row['type'] == self::space_type ) $space_list[$row['sign_id']] = $row['name'];
+        }
+
         if($t == 'base'){
             if($id) $result = Base::where("rec_id",$id)->first();
             else return view('errors.503');
@@ -140,6 +161,10 @@ class AdminController extends Controller
         }elseif($t == 'retrofit'){
             if($id) $result = Retrofit::where("rec_id",$id)->first();
             else $result = array('rec_id'=>0,'title'=>'','type'=>'other','img_url'=>'');
+        }elseif($t == 'floor') {
+            $space_list = array(0=>'普通地板',1=>'自热地板');
+            if($id) $result = Floor::where("rec_id",$id)->first();
+            else $result = array('rec_id'=>0,'name'=>'','type'=>'0','img_url'=>'');
         }elseif($t == 'event'){
             if($id) $result = Article::where("rec_id",$id)->first();
             else $result = array('rec_id'=>0,'title'=>'','type'=>0,'sort'=>0,'title_img'=>'','keywords'=>'','description'=>'','create_time'=>date('Y-m-d H:i:s'),'content'=>'');
@@ -147,13 +172,6 @@ class AdminController extends Controller
             return view('errors.503');
         }
 
-        $base_res = Base::select('name','sign_id','type')->whereIn('type', array(self::style_type ,self::house_type,self::space_type))->orderBy('sort', 'desc')->get()->toArray();
-        $house_list = $style_list = $space_list = array();
-        foreach($base_res as $row){
-            if($row['type'] == self::style_type) $style_list[$row['sign_id']] = $row['name'];
-            elseif($row['type'] == self::house_type ) $house_list[$row['sign_id']] = $row['name'];
-            elseif($row['type'] == self::space_type ) $space_list[$row['sign_id']] = $row['name'];
-        }
         $data = array('curr'=>$t,'style_list'=>$style_list,'house_list'=>$house_list,'type_list'=>$space_list);
         return view('admin.'.$t.'_edit')->with(['data'=>$data,'info'=>$result]);
     }
@@ -167,6 +185,7 @@ class AdminController extends Controller
         if($t == 'base') $res = Base::whereIn('rec_id',$ids)->delete();
         elseif($t == 'fitment') $res = Fitment::whereIn('rec_id', $ids)->delete();
         elseif($t == 'retrofit') $res = Retrofit::whereIn('rec_id', $ids)->delete();
+        elseif($t == 'floor') $res = Floor::whereIn('rec_id', $ids)->delete();
         elseif($t == 'event') $res = Article::whereIn('rec_id', $ids)->delete();
         else splash('error','参数有误');
 
@@ -203,6 +222,12 @@ class AdminController extends Controller
             $data['img_url'] = trim($_REQUEST['img_url']);
             if(empty($id)) $res = $id = Retrofit::insertGetId($data);
             else $res = Retrofit::where('rec_id', $id)->update($data);
+        }elseif($t == 'floor') {
+            $data['name'] = trim($_REQUEST['name']);
+            $data['type'] = trim($_REQUEST['type']);
+            $data['img_url'] = trim($_REQUEST['img_url']);
+            if(empty($id)) $res = $id = Floor::insertGetId($data);
+            else $res = Floor::where('rec_id', $id)->update($data);
         }elseif($t == 'event'){
             $data['title'] = trim($_REQUEST['title']);
             $data['type'] = intval($_REQUEST['type']);

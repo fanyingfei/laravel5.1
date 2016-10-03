@@ -22,8 +22,11 @@ Route::get('/events/in/{p?}', 'MainController@events_in')->where('p', '[0-9]+');
 Route::get('/show/{id}', 'MainController@show');
 
 Route::get('/about',  'MainController@about');
+Route::post('/quality/query','MainController@quality_query');
 
-Route::get('/bespeak', 'MainController@bespeak');
+Route::get('/floor',  'MainController@floor');
+Route::get('/floor/general',  'MainController@floor_general');
+
 Route::post('/bespeak/save', 'MainController@bespeak_save');
 
 Route::get('/fitment/{p?}', 'MainController@fitment');
@@ -46,6 +49,7 @@ Route::group(['prefix' => 'admin','middleware' =>'myauth'], function()
     Route::get('base', 'AdminController@base');
     Route::get('fitment', 'AdminController@fitment');
     Route::get('retrofit', 'AdminController@retrofit');
+    Route::get('floor', 'AdminController@floor');
     Route::get('event', 'AdminController@event');
 
     Route::get('list', 'AdminController@data_list');

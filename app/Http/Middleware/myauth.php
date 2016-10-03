@@ -5,7 +5,7 @@ use Session;
 use Closure;
 use Illuminate\Support\Facades\Redirect;
 
-class myauth
+class Myauth
 {
     /**
      * Handle an incoming request.

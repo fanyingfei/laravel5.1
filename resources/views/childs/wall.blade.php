@@ -43,41 +43,38 @@
     <div class="f-content">
         <div class="flow-list">
             <div>
-                <div class="flow-img"><img src="/img/retrofit/p01.jpg" /></div>
+                <div class="flow-img"><img src="http://ww2.sinaimg.cn/large/ce768b7ajw1f8evk0giwwj20dw09274p.jpg" /></div>
                 <div class="flow-step"><strong>01</strong><span>免费检测</span></div>
                 <div class="flow-content">免费上门为您检测墙面状况，测量施工墙面面积，为施工方案提供准确依据</div>
             </div>
             <div>
-                <div class="flow-img"><img src="/img/retrofit/p02.jpg" /></div>
+                <div class="flow-img"><img src="http://ww1.sinaimg.cn/mw690/ce768b7ajw1f8evmnnpsqj2095064jrd.jpg" /></div>
                 <div class="flow-step"><strong>02</strong><span>制定方案</span></div>
                 <div class="flow-content">根据墙面状况指定施工方案，包括墙面漆、腻子的选择，施工周期和施工预算，并签定合同</div>
             </div>
             <div class="flow-right">
-                <div class="flow-img"><img src="/img/retrofit/p04.jpg" /></div>
+                <div class="flow-img"><img src="http://ww2.sinaimg.cn/mw690/ce768b7ajw1f8evrhhy4ej20dw0b476b.jpg" /></div>
                 <div class="flow-step"><strong>03</strong><span>搬移保护</span></div>
                 <div class="flow-content">我们帮您搬移家具，并保护家具、地板、灯具和开关等，避免磕碰弄脏，让您安心放心</div>
             </div>
             <div>
-                <div class="flow-img"><img src="/img/retrofit/p04.jpg" /></div>
+                <div class="flow-img"><img src="http://ww3.sinaimg.cn/large/ce768b7ajw1f8evtw7yuzj2094064q2v.jpg" /></div>
                 <div class="flow-step"><strong>04</strong><span>无尘打磨</span></div>
                 <div class="flow-content">我们有经验丰富的施工团队，打磨无灰尘，丝毫不影响您的生活，为您提供优势、高效的服务</div>
             </div>
             <div>
-                <div class="flow-img"><img src="/img/retrofit/p04.jpg" /></div>
+                <div class="flow-img"><img src="http://ww4.sinaimg.cn/mw690/ce768b7ajw1f8evxmai24j20dw096aap.jpg" /></div>
                 <div class="flow-step"><strong>05</strong><span>清洁归位</span></div>
                 <div class="flow-content">所有墙面涂新完成后，我们帮您把家具归位，并清理房间，验收完所有施工项目后才收取尾款</div>
             </div>
             <div class="flow-right">
-                <div class="flow-img"><img src="/img/retrofit/p03.jpg" /></div>
+                <div class="flow-img"><img src="http://ww2.sinaimg.cn/mw690/ce768b7ajw1f8f0gp952mj20dy09xmxh.jpg" /></div>
                 <div class="flow-step"><strong>06</strong><span>售后保证</span></div>
-                <div class="flow-content">施工完成后，我们为您提供一年质保期，全铲除型质保两年</div>
+                <div class="flow-content">施工完成后，我们为您提供一年质保期，全铲除型质保两年。质保信息可在官网查询</div>
             </div>
         </div>
     </div>
-    <div class="f-content">
-    <p class="p-price"><strong>修补型：</strong>&nbsp;&nbsp;60/㎡<span>包含：人工 25/㎡</span><span>辅材 15/㎡</span><span>涂料 20/㎡</span></p>
-    <p class="p-price"><strong>铲除型：</strong>100/㎡<span>包含：人工 45/㎡</span><span>辅材 35/㎡</span><span>涂料 20/㎡</span></p>
-    <table class="wall-price"  border="1" cellpadding="3">
+    <table class="wall-price f-content"  border="1" cellpadding="3">
         <tr class="table-th">
             <td width="60">编号</td>
             <td width="350">服务内容</td>
@@ -252,7 +249,7 @@
             <td>车</td>
             <td>350</td>
             <td>350</td>
-            <td>将建筑垃圾运输至小区外垃圾站处理</td>
+            <td>将建筑垃圾运输至小区外垃圾站处理（少量垃圾不收费）</td>
         </tr>
         <tr>
             <td>22</td>
@@ -263,5 +260,4 @@
             <td>施工前进行家具搬移和遮蔽保护;免费服务</td>
         </tr>
     </table>
-    </div>
 @stop
