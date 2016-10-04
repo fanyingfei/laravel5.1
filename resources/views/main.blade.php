@@ -18,12 +18,12 @@
             <ul class="menu">
                 <li class="logo"><a href="/"><img src="/img/icon/logo.png"/></a></li>
                 <li @if ( $data['body'] == 'home') class="cur-nav" @endif><a href="/">官网首页</a></li>
-                <li @if ( $data['body'] == 'retrofit') class="cur-nav" @endif><a href="/retrofit">室内翻新</a></li>
-                <li @if ( $data['body'] == 'fitment') class="cur-nav" @endif><a href="/fitment">整体装修</a></li>
+                <li @if ( $data['body'] == 'retrofit') class="cur-nav" @endif><a href="/wall">室内翻新</a></li>
                 <li @if ( $data['body'] == 'floor') class="cur-nav" @endif><a href="/floor">木质地板</a></li>
                 <li @if ( $data['body'] == 'faq') class="cur-nav" @endif><a href="/faq">常见问题</a></li>
                 <li @if ( $data['body'] == 'events') class="cur-nav" @endif><a href="/events">动态资讯</a></li>
-                <li class="last @if ( $data['body'] == 'about')cur-nav @endif "><a href="/about">关于我们</a></li>
+                <li @if ( $data['body'] == 'about') class="cur-nav" @endif><a href="/about">关于我们</a></li>
+                <li class="last"><a href="javascript:bespeak()">在线预约</a></li>
                 <li class="contact"><p>免费预约电话</p><p>13524112936</p></li>
             </ul>
         </div>

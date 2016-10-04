@@ -2,7 +2,14 @@
 
 @section('content')
     <div class="fitment-bg  crumb-bg"></div>
-
+    <div class="retrofit-wrapper">
+        <ul class="retrofit-tab">
+            <li>服务项目：</li>
+            <li><a @if ( $data['curr'] == 'wall') class="curr" @endif href="/wall">墙面翻新</a></li>
+            <li><a @if ( $data['curr'] == 'part') class="curr" @endif href="/part">局部翻新</a></li>
+            <li><a @if ( $data['curr'] == 'fitment') class="curr" @endif href="/fitment">整体翻新</a></li>
+        </ul>
+    </div>
     <div class="fitment-filter">
         <dl class="cf ts">
             <dt>风格：</dt>
@@ -25,7 +32,7 @@
     <div class="fitment-wrapper">
          <div class="fitment-list">
               @foreach ($data['list'] as $key=>$row)
-                    <div class="fitment-one">
+                    <div class="fitment-one @if ( ($key + 1)%3== 0) f-three @endif">
                         <a class="fitment-img" data-id="{{ $row['rec_id'] }}"><img src="{{ $row['img_url'] }}" /><div></div></a>
                         <p>{{ $row['name'] }}{{ $row['style'] }}{{ $row['house'] }}</p>
                         <p class="detail"><span class="m8"> <i>{{ $row['img_num'] }}</i>张</span></p>

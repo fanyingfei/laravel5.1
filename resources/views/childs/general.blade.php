@@ -1,5 +1,9 @@
 @extends('floor')
 
+@section('floor-info')
+    <ul class="retrofit-tab retrofit-info general-info"></ul>
+@stop
+
 @section('floor-content')
     <div class="f-content">
         @foreach ($data['list'] as $key=>$row)

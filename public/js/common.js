@@ -61,7 +61,7 @@ $(function(){
     //监听到顶部点击事件
     $("#top").click(function(){$('html,body').animate({scrollTop: 0}, 500);})
 
-    $('body').on('click', '.close', function(){$('.modal-bg').hide(); })
+    $('body').on('click', '.close', function(){$('.modal-bg').hide(300);})
 
     $('body').on('click', '.bespeak-submit', function(){
         var name = $('.b-name').val();
@@ -88,7 +88,7 @@ $(function(){
             success:function(obj){
                 alert(obj.msg);
                 if(obj.status == 'success'){
-                    $('.modal-bg').hide();
+                    $('.modal-bg').hide(300);
                 }
             },
             error:function (){}

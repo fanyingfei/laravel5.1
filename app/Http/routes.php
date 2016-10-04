@@ -17,7 +17,7 @@ Route::get('/faq', 'MainController@faq');
 
 
 Route::get('/events/{p?}', 'MainController@events_ev')->where('p', '[0-9]+');
-Route::get('/events/in/{p?}', 'MainController@events_in')->where('p', '[0-9]+');
+Route::get('/information/{p?}', 'MainController@events_in')->where('p', '[0-9]+');
 
 Route::get('/show/{id}', 'MainController@show');
 
@@ -35,9 +35,9 @@ Route::get('/fitment/ts/{id}/{p?}', 'MainController@fitment_ts');
 Route::get('/fitment/ts/{style}/hs/{house}/{p?}', 'MainController@fitment_filter');
 Route::get('/fitment/img/{id}', 'MainController@fitment_img');
 
-Route::get('/retrofit', 'MainController@retrofit');
-Route::get('/retrofit/other','MainController@retrofit_other');
-Route::get('/page/retrofit/{curr}/{p}','MainController@retrofit_page');
+Route::get('/wall', 'MainController@retrofit');
+Route::get('/part','MainController@retrofit_part');
+Route::get('/page/{curr}/{p}','MainController@retrofit_page');
 
 //后台路由
 Route::get('/admin/login', ['as' => 'login', 'uses'=>'AdminController@login']);

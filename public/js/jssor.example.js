@@ -87,11 +87,11 @@ function jssor_init(){
     //responsive code begin
     //you can remove responsive code if you don't want the slider scales while window resizes
 
-    ScaleSlider(jssor_slider1);
+    //ScaleSlider(jssor_slider1);
 
-    $(window).bind("load", ScaleSlider);
-    $(window).bind("resize", ScaleSlider);
-    $(window).bind("orientationchange", ScaleSlider);
+    //$(window).bind("load", ScaleSlider);
+    //$(window).bind("resize", ScaleSlider);
+    //$(window).bind("orientationchange", ScaleSlider);
     //responsive code end
 }
 

@@ -171,7 +171,7 @@ class MainController extends Controller
     }
 
     public function out_fitment($p,$fitment_curr=0,$house_curr=0){
-        $limit = 15;
+        $limit = 12;
         if($p > 0) $p--;
         $base_res = Base::select('name','sign_id','type')->whereIn('type', array(self::style_type ,self::house_type))->orderBy('sort', 'desc')->get()->toArray();
         $house_list = $fitment_list = array();
@@ -218,13 +218,14 @@ class MainController extends Controller
 
         $pagination = GetPage($total_count,$limit,$p);
 
-        $data['body'] = 'fitment';
+        $data['body'] = 'retrofit';
         $data['title'] = '整体装修';
         $data['keywords'] = '';
         $data['description'] = '';
         $data['pagination'] = $pagination;
         $data['list'] = $list_res;
         $data['house_list'] = $house_list;
+        $data['curr'] = 'fitment';
         $data['house_curr'] = $house_curr;
         $data['fitment_list'] = $fitment_list;
         $data['fitment_curr'] = $fitment_curr;
@@ -258,8 +259,8 @@ class MainController extends Controller
         return view('childs.wall')->with('data', $data);
     }
 
-    public function retrofit_other(){
-        $data = $this->out_retrofit('other');
+    public function retrofit_part(){
+        $data = $this->out_retrofit('part');
         $space_res = Base::select('name','sign_id')->where('type', self::space_type)->get()->toArray();
         $space_list = array_column($space_res,'name','sign_id');
         foreach($data['list'] as &$row){
@@ -267,7 +268,7 @@ class MainController extends Controller
             $type_name = $type_name == '【其他】' ? '' : $type_name;
             $row['title'] = $type_name.$row['title'];
         }
-        return view('childs.other')->with('data', $data);
+        return view('childs.part')->with('data', $data);
     }
 
     public function quality_query(){
@@ -291,12 +292,13 @@ class MainController extends Controller
     }
 
     public function out_retrofit($curr = 'wall' , $p = 0){
-        $limit = 15;
+        $limit = 12;
         if($p > 0) $p--;
-        $total_count = Retrofit::count();
         if($curr == 'wall'){
+            $total_count = Retrofit::where("type",0)->count();
             $list = Retrofit::where("type",0)->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }else{
+            $total_count = Retrofit::where("type",'>',0)->count();
             $list = Retrofit::where("type",'>',0)->orderBy('type', 'asc')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }
         $pagination = GetPage($total_count,$limit,$p,'ajax_page');

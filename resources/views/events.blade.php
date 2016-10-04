@@ -7,7 +7,7 @@
     <div class="events-wrapper">
         <ul class="events-side">
             <li><a @if ( $data['curr'] == 'ev') class="curr" @endif href="/events">动态<i></i></a></li>
-            <li><a @if ( $data['curr'] == 'in') class="curr" @endif href="/events/in">资讯<i></i></a></li>
+            <li><a @if ( $data['curr'] == 'in') class="curr" @endif href="/information">资讯<i></i></a></li>
         </ul>
         <div class="events-list">
             @foreach ($data['events_list'] as $key=>$row)

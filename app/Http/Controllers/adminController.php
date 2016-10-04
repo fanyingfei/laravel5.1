@@ -203,8 +203,8 @@ class AdminController extends Controller
         if($t == 'base'){
             $data['name'] = trim($_REQUEST['name']);
             $data['sort'] = trim($_REQUEST['sort']);
-            if(!empty($_REQUEST['url'])) $data['url'] = trim($_REQUEST['url']);
-            if(!empty($_REQUEST['img_url'])) $data['img_url'] = trim($_REQUEST['img_url']);
+            $data['url'] = trim($_REQUEST['url']);
+            $data['img_url'] = trim($_REQUEST['img_url']);
             if(empty($id)) splash('error','参数有误');
             else $res = Base::where('rec_id', $id)->update($data);
         }elseif($t == 'fitment'){
