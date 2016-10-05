@@ -3,12 +3,6 @@
 @section('content')
     <div class="fitment-bg  crumb-bg"></div>
     <div class="retrofit-wrapper">
-        <ul class="retrofit-tab tab-href">
-            <li>服务项目：</li>
-            <li><a @if ( $data['curr'] == 'wall') class="curr" @endif href="/wall">墙面翻新</a></li>
-            <li><a @if ( $data['curr'] == 'part') class="curr" @endif href="/part">局部翻新</a></li>
-            <li><a @if ( $data['curr'] == 'fitment') class="curr" @endif href="/fitment">整体翻新</a></li>
-        </ul>
         @yield('retrofit-info')
         <div class="tab-content">
             @yield('tab-content')
@@ -54,15 +48,6 @@ $(function(){
 
 	change_tab();
 });
-
-function change_tab(){
-    var url = window.location.href;
-    if(url.indexOf("#")<0) return false;
-    var tab = url.substr(-1);
-    $('.retrofit-info li').eq(tab).children('a').addClass("curr");
-    $('.retrofit-info li').eq(tab).siblings().children('a').removeClass("curr");
-    $('.f-content').eq(tab-1).fadeIn().siblings().hide();
-}
 
 function ajax_page(p){
     var curr = $('.tab-href .curr').attr('href');

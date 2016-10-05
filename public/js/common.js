@@ -38,23 +38,13 @@ $(function(){
         });
     }
 
-    $(".retrofit-info li").click(function(){
+    $(".tab-menu li").click(function(){
         $(this).children('a').addClass("curr").end().siblings().children('a').removeClass("curr");
         var index = $(this).index() - 1;
         $('.f-content').eq(index).fadeIn().siblings().hide();
     });
 
     footer_bottom();
-    function footer_bottom(){
-        var win_height = $(window).height();
-        var footer_top = $('.footer').offset().top;
-        var footer_height = $('.footer').height();
-        if(footer_top + footer_height < win_height){
-            $('.footer').addClass('footer-bottom');
-        }else{
-            if($('.footer').hasClass('footer-bottom')) $('.footer').removeClass('footer-bottom');
-        }
-    }
 
     window.onresize=function(){footer_bottom();}
 
@@ -81,14 +71,16 @@ $(function(){
 
         $.ajax({
             url:'/bespeak/save',
-            data:{'mobile':mobile,'name':name,'address':address,'remark':remark},
+            data:{'mobile':mobile,'name':name,'address':address,'remark':remark,'t':'bespeak'},
             type:'post',
             dataType:'json',
             headers:{'X-CSRF-TOKEN':token},
             success:function(obj){
-                alert(obj.msg);
                 if(obj.status == 'success'){
+                    alert('预约成功');
                     $('.modal-bg').hide(300);
+                }else{
+                    alert(obj.msg);
                 }
             },
             error:function (){}
@@ -103,4 +95,26 @@ $(function(){
             $("#top").hide();
         }
     });
+
+
 });
+
+function change_tab(){
+    var url = window.location.href;
+    if(url.indexOf("#")<0) return false;
+    var tab = url.substr(-1);
+    $('.tab-menu li').eq(tab).children('a').addClass("curr");
+    $('.tab-menu li').eq(tab).siblings().children('a').removeClass("curr");
+    $('.f-content').eq(tab-1).fadeIn().siblings().hide();
+}
+
+function footer_bottom(){
+    var win_height = $(window).height();
+    var footer_top = $('.footer').offset().top;
+    var footer_height = $('.footer').height();
+    if(footer_top + footer_height < win_height){
+        $('.footer').addClass('footer-bottom');
+    }else{
+        if($('.footer').hasClass('footer-bottom')) $('.footer').removeClass('footer-bottom');
+    }
+}

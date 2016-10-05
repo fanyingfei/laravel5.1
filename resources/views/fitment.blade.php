@@ -2,14 +2,6 @@
 
 @section('content')
     <div class="fitment-bg  crumb-bg"></div>
-    <div class="retrofit-wrapper">
-        <ul class="retrofit-tab">
-            <li>服务项目：</li>
-            <li><a @if ( $data['curr'] == 'wall') class="curr" @endif href="/wall">墙面翻新</a></li>
-            <li><a @if ( $data['curr'] == 'part') class="curr" @endif href="/part">局部翻新</a></li>
-            <li><a @if ( $data['curr'] == 'fitment') class="curr" @endif href="/fitment">整体翻新</a></li>
-        </ul>
-    </div>
     <div class="fitment-filter">
         <dl class="cf ts">
             <dt>风格：</dt>

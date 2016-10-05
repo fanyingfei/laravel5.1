@@ -1,7 +1,7 @@
 @extends('retrofit')
 
 @section('retrofit-info')
-    <ul class="retrofit-tab retrofit-info">
+    <ul class="tab-list tab-menu">
         <li>服务介绍：</li>
         <li><a href="#1" class="curr">服务简介</a></li>
         <li><a href="#2">施工流程</a></li>

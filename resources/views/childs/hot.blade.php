@@ -1,13 +1,13 @@
 @extends('floor')
 
 @section('floor-info')
-    <ul class="retrofit-tab retrofit-info">
+    <ul class="tab-list tab-menu">
         <li>产品介绍：</li>
-        <li><a class="curr">产品简介</a></li>
-        <li><a>科技低碳</a></li>
-        <li><a>科技保健</a></li>
-        <li><a>科技安全</a></li>
-        <li><a>产品展示</a></li>
+        <li><a href="#1" class="curr">产品简介</a></li>
+        <li><a href="#2">科技低碳</a></li>
+        <li><a href="#3">科技保健</a></li>
+        <li><a href="#4">科技安全</a></li>
+        <li><a href="#5">产品展示</a></li>
     </ul>
 @stop
 

@@ -18,11 +18,11 @@
             <ul class="menu">
                 <li class="logo"><a href="/"><img src="/img/icon/logo.png"/></a></li>
                 <li @if ( $data['body'] == 'home') class="cur-nav" @endif><a href="/">官网首页</a></li>
-                <li @if ( $data['body'] == 'retrofit') class="cur-nav" @endif><a href="/wall">室内翻新</a></li>
+                <li @if ( $data['body'] == 'wall') class="cur-nav" @endif><a href="/wall">墙面刷新</a></li>
+                <li @if ( $data['body'] == 'part') class="cur-nav" @endif><a href="/part">局部翻新</a></li>
+                <li @if ( $data['body'] == 'fitment') class="cur-nav" @endif><a href="/fitment">整体翻新</a></li>
                 <li @if ( $data['body'] == 'floor') class="cur-nav" @endif><a href="/floor">木质地板</a></li>
-                <li @if ( $data['body'] == 'faq') class="cur-nav" @endif><a href="/faq">常见问题</a></li>
                 <li @if ( $data['body'] == 'events') class="cur-nav" @endif><a href="/events">动态资讯</a></li>
-                <li @if ( $data['body'] == 'about') class="cur-nav" @endif><a href="/about">关于我们</a></li>
                 <li class="last"><a href="javascript:bespeak()">在线预约</a></li>
                 <li class="contact"><p>免费预约电话</p><p>13524112936</p></li>
             </ul>
@@ -32,10 +32,27 @@
         @yield('content')
     </div>
     <div class="footer">
+        <p>
+            <span>免费服务热线：13524112936</span>
+            <span>客服QQ：<a rel="external nofollow" target="_blank" href="http://wpa.qq.com/msgrd?uin=605022496&site=qq&menu=yes">605022496</a></span>
+            <span>服务邮箱：605022496@qq.com</span>
+            <span>工作时间：周一至周日 09:00-22:00</span>
+        </p>
+        <p>
+            <a href="/events">动态</a> |
+            <a href="/information">资讯</a> |
+            <a href="/about">关于我们</a> |
+            <a href="/about/bsk">预约查询</a> |
+            <a href="/about/qua">质保查询</a> |
+            <a href="/about/faq">常见问题</a>
+        </p>
+        <p>
+            <span>Copyright2012-2016 www.shuaxin.co,All Rights Reserved</span>
+            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备15072739号-1</a></span>
+        </p>
         <input id="token" type="hidden" value="{{ csrf_token() }}" >
     </div>
-    <div id="bespeak" onclick="bespeak()">免费预约</div>
-    <div id="online"><a href="http://wpa.qq.com/msgrd?uin=605022496&site=qq&menu=yes" target="_blank">在线咨询</a></div>
+    <div id="online"><a rel="external nofollow" href="http://wpa.qq.com/msgrd?uin=605022496&site=qq&menu=yes" target="_blank">在线咨询</a></div>
     <div id="top"></div>
     <div class="modal-bg"></div>
 </body>

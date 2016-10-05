@@ -35,6 +35,7 @@ button{
 .container{
     overflow: auto;
     position: relative;
+    min-height: 400px;
 }
 .crumb-bg{
     position: relative;
@@ -601,30 +602,35 @@ button{
     background-repeat: no-repeat;
     background-size: 1920px 320px;
 }
+.wall .fitment-bg{
+    background-image: url('http://ww2.sinaimg.cn/large/ce768b7ajw1f8gn621mjwj21gn08pwib.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1920px 320px;
+}
+.part .fitment-bg{
+    background-image: url('http://ww2.sinaimg.cn/large/ce768b7ajw1f8gnaq1cvaj21hc08cgpa.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1920px 320px;
+}
 .retrofit-wrapper{
     padding:0 20px;
     width: 1160px;
     margin: 0 auto;
 }
-.retrofit-tab{
+.tab-list{
+    border-bottom: 1px solid #ddd;
     margin: 0 auto;
+    margin-bottom: 20px;
     overflow: auto;
     padding: 5px 0;
 }
-.retrofit-info{
-    padding-top:15px;
-    border-top:1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
-}
-.general-info{
-    border-bottom: 0;
-}
-.retrofit-tab li{
+.tab-list li{
     float:left;
     padding:0 10px;
 }
-.retrofit-tab li:first-child{
+.tab-list li:first-child{
     font-size: 14px;
     height: 50px;
     line-height: 50px;
@@ -632,15 +638,15 @@ button{
     color: #333;
     padding-left:0;
 }
-.retrofit-tab li a{
+.tab-list li a{
     color: #333;
     padding:5px 10px;
     font-size: 14px;
     height: 50px;
     line-height: 50px;
 }
-.retrofit-tab li a:hover,
-.retrofit-tab li a.curr{
+.tab-list li a:hover,
+.tab-list li a.curr{
     background-color: #898989;
     border-radius: 3px;
     color:#fff;
@@ -650,7 +656,7 @@ button{
     width:371px;
 }
 .f-three{
-    margin-right: 0;
+    margin-right: 0 !important;
 }
 .tab-content{
     min-height: 360px;
@@ -860,25 +866,12 @@ button{
 }
 /*floor end*/
 /*faq start*/
-.faq-bg{
-    background-image: url('http://ww2.sinaimg.cn/large/ce768b7ajw1f8gm210z6gj21hc08cq5s.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 1920px 320px;
-    background-color: #E7FCFF;
-}
-.faq-wrapper{
-    width: 1160px;
-    margin: 0 auto;
-    padding:0 20px;
-}
-.faq-list{
-    border:1px solid #ddd;
-    padding:15px 42px;
-}
 .faq-row{
     padding: 20px 0;
     border-bottom:1px solid #ddd;
+}
+.faq-row:first-child{
+    padding-top:0;
 }
 .faq-row:last-child{
     border-bottom:0;
@@ -890,7 +883,7 @@ button{
 .faq-row .q{
     cursor: pointer;
     color: #4c4c4c;
-    font-size: 18px;
+    font-size: 16px;
 }
 .faq-row .q span{
     float:right;
@@ -946,16 +939,64 @@ button{
 }
 /*page end*/
 /*about start*/
-.quality-card{
-    width:436px;
-    height:246px;
-    margin-top: 20px;
-    border-radius: 5px;
-    border:1px solid #ddd;
-    float:left;
-    margin-right:20px;
+.about-wrapper{
+    overflow: auto;
+    position: relative;
+    min-height: 500px;
+    width: 1160px;
+    margin: 0 auto;
+    margin-top:20px;
 }
-.quality input {
+.about-side {
+    width: 200px;
+    float: left;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+}
+.about-side li {
+    padding: 0 2em;
+    height: 4em;
+    line-height: 4em;
+    text-align: left;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+.about-side li:last-child{
+    border-bottom: 0;
+}
+.about-side li.curr{
+    background: #fff;
+    border-left: 4px solid #fe7902;
+    color: #fe7902;
+}
+.about-side li a {
+    display: block;
+    width: 140px;
+    height: 100%;
+    font-size: 15px;
+    color: #555;
+    padding-left: 30px;
+}
+.about-side li.curr a{
+    padding-left:26px;
+}
+.about-side li a:hover{
+    color:#fe7902;
+}
+.about-list{
+    width:845px;
+    float:right;
+    margin-right: 5px;
+    min-height: 400px;
+    border:1px solid #ddd;
+    background-color: #fafafa;
+    padding: 0 42px 15px;
+}
+.about-list h2{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+.query input {
     width: 345px;
     height: 34px;
     line-height: 34px;
@@ -965,7 +1006,7 @@ button{
     font-size: 12px;
     border: 1px solid #91cdb8;
 }
-.quality .q-sub{
+.query .p-sub{
     padding: 7px 12px;
     color:#fff;
     margin-left: 20px;
@@ -973,6 +1014,21 @@ button{
     border: 1px solid transparent;
     border-radius: 4px;
     background-color:#76B2E1 ;
+}
+.result-list{
+    margin-top:20px;
+}
+.result-list p{
+    height: 30px;
+    line-height: 30px;;
+}
+.result-list p span{
+    padding-right:10px;
+}
+.about-us p{
+    line-height: 20px;
+    margin:10px 0;
+    font-size: 14px;
 }
 /*about end*/
 
@@ -1153,14 +1209,32 @@ button{
 /*图片轮播结束*/
 /*footer*/
 .footer {
-    width: 100%;
-    background-color: #f3f3f3;
-    height: 80px;
-    margin-top: 60px;
+    width:100%;
+    min-width: 1200px;
+    text-align: center;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+    padding: 20px 0px;
+    margin-top:80px;
 }
 .footer-bottom{
     position: absolute;
     bottom: 0;
+}
+.footer p {
+    line-height: 32px;
+}
+.footer p span{
+    padding:0 5px;
+}
+.footer p a {
+    margin: 0px 5px;
+    color: #555;
+}
+.footer a:hover {
+    text-decoration: underline;
+    color: #fe7902;
 }
 /*footer结束*/
 /*right-fixed*/
@@ -1191,7 +1265,6 @@ button{
     transform: rotate(360deg);
     opacity: 1;
 }
-#bespeak,
 #online{
     bottom: 0;
     right:0;
@@ -1204,19 +1277,14 @@ button{
     cursor: pointer;
     z-index: 999;
 }
-#bespeak,
 #online a{
     display: block;
     color:#fff;
     font-size:14px;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 80px;
     padding:5px;
 }
-#bespeak{
-    margin-bottom: 260px;
-}
-#bespeak:hover,
 #online:hover{
     background: rgba(0,6,32,1);
 }

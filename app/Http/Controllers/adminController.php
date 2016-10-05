@@ -22,6 +22,7 @@ class AdminController extends Controller
     const style_type = 1;  //风格
     const house_type = 2;  //户型
     const space_type = 3;  //空间
+    private $bespeak_type = array(0=>'已预约',1=>'施工中',2=>'已完成',3=>'无效');
 
     /**
      * Display a listing of the resource.
@@ -74,6 +75,11 @@ class AdminController extends Controller
     public function event(){
         $data['curr'] = 'event';
         return view('admin.event')->with('data', $data);
+    }
+
+    public function bespeak(){
+        $data['curr'] = 'bespeak';
+        return view('admin.bespeak')->with('data', $data);
     }
 
     public function data_list(){
@@ -132,6 +138,15 @@ class AdminController extends Controller
                 if($v['type'] == 1) $v['type'] = '活动';
                 elseif($v['type'] == 2) $v['type'] = '资讯';
             }
+        }elseif($t == 'bespeak'){
+            $bespeak_type = $this->bespeak_type;
+            $data['total'] = Bespeak::count();
+            $data['rows'] = Bespeak::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
+
+            foreach($data['rows'] as $key=>&$v){
+                $v['type'] = empty($bespeak_type[$v['type']]) ? '未知' : $bespeak_type[$v['type']];
+                $v['op'] = '<a class="edit-btn" href="/admin/edit?t=bespeak&id='.$v['rec_id'].'">编辑</a>';
+            }
         }
         echo json_encode($data);
     }
@@ -168,11 +183,14 @@ class AdminController extends Controller
         }elseif($t == 'event'){
             if($id) $result = Article::where("rec_id",$id)->first();
             else $result = array('rec_id'=>0,'title'=>'','type'=>0,'sort'=>0,'title_img'=>'','keywords'=>'','description'=>'','create_time'=>date('Y-m-d H:i:s'),'content'=>'');
+        }elseif($t == 'bespeak'){
+            if($id) $result = Bespeak::where("rec_id",$id)->first();
+            else $result = array('rec_id'=>0,'name'=>'','type'=>0,'mobile'=>'','address'=>'','remark'=>'','keep_time'=>'','create_time'=>date('Y-m-d H:i:s'),'year'=>0);
         }else{
             return view('errors.503');
         }
 
-        $data = array('curr'=>$t,'style_list'=>$style_list,'house_list'=>$house_list,'type_list'=>$space_list);
+        $data = array('curr'=>$t,'style_list'=>$style_list,'house_list'=>$house_list,'type_list'=>$space_list,'bespeak_type'=>$this->bespeak_type);
         return view('admin.'.$t.'_edit')->with(['data'=>$data,'info'=>$result]);
     }
 
@@ -239,6 +257,22 @@ class AdminController extends Controller
             $data['title_img'] = trim($_REQUEST['title_img']);
             if(empty($id)) $res = $id = Article::insertGetId($data);
             else $res = Article::where('rec_id', $id)->update($data);
+        }elseif($t == 'bespeak'){
+            $data['name'] = $name = trim($_POST['name']);
+            $data['mobile'] = $mobile = trim($_POST['mobile']);
+            $data['address'] = $address = trim($_POST['address']);
+            $data['remark'] = $remark = trim($_POST['remark']);
+            $data['create_time'] = date('Y-m-d H:i:s');
+            $data['type'] = empty($_POST['type']) ? 0 : $_POST['type'];
+            if($data['type'] == 2 && !empty($_POST['year'])){
+                $data['year'] = intval($_POST['year']);
+                $data['keep_time'] = date('Y.m.d').'-'.date('Y.m.d',strtotime('+'.$data['year'].' year'));
+            }
+
+            if(empty($name) || empty($mobile) || empty($address)) splash('error','请填写完整信息');
+            if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
+            if(empty($id)) $res = $id = Bespeak::insertGetId($data);
+            else $res = Bespeak::where('rec_id', $id)->update($data);
         }else{
             return view('errors.503');
         }

@@ -58,31 +58,13 @@ class MainController extends Controller
         return view('faq')->with('data', $data);
     }
 
-    public function about(){
+    public function about($name=''){
         $data['body'] = 'about';
         $data['title'] = '关于我们';
+        $data['curr'] =$name;
         $data['keywords'] = '';
         $data['description'] = '';
         return view('about')->with('data', $data);
-    }
-
-    public function bespeak_save(){
-        $data['name'] = $name = trim($_POST['name']);
-        $data['mobile'] = $mobile = intval($_POST['mobile']);
-        $data['address'] = $address = trim($_POST['address']);
-        $data['remark'] = $remark = trim($_POST['remark']);
-        $data['create_time'] = date('Y-m-d H:i:s');
-
-        if(empty($name) || empty($mobile) || empty($address)) splash('error','请填写完整信息');
-        if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
-
-        $res = Bespeak::insertGetId($data);
-
-        if($res){
-            splash('success','预约成功');
-        }else{
-            splash('error','预约失败,请重试');
-        }
     }
 
     public function events($p = 0){
@@ -218,7 +200,7 @@ class MainController extends Controller
 
         $pagination = GetPage($total_count,$limit,$p);
 
-        $data['body'] = 'retrofit';
+        $data['body'] = 'fitment';
         $data['title'] = '整体装修';
         $data['keywords'] = '';
         $data['description'] = '';
@@ -256,11 +238,13 @@ class MainController extends Controller
 
     public function retrofit(){
         $data = $this->out_retrofit();
+        $data['body'] = 'wall';
         return view('childs.wall')->with('data', $data);
     }
 
     public function retrofit_part(){
         $data = $this->out_retrofit('part');
+        $data['body'] = 'part';
         $space_res = Base::select('name','sign_id')->where('type', self::space_type)->get()->toArray();
         $space_list = array_column($space_res,'name','sign_id');
         foreach($data['list'] as &$row){
@@ -271,14 +255,24 @@ class MainController extends Controller
         return view('childs.part')->with('data', $data);
     }
 
-    public function quality_query(){
+    public function data_query(){
         $mobile = intval($_POST['mobile']);
         if(empty($mobile)) splash('error','请输入手机号');
         if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
 
-      //  $res = Bespeak::where(['mobile'=>$mobile,'type'=>1])->get()->toArray();
-        $res[0] = array('keep_time'=>'asdfasdfasdf');
-        $res[1] = array('keep_time'=>'bbbbbbbbbbb');
+        $type = isset($_POST['t']) ? $_POST['t'] : 'all';
+        if($type == 'all'){
+            $res = Bespeak::select('name','address','create_time','remark')->where('mobile',$mobile)->where('type','<',3)->get()->toArray();
+        }else{
+            $res = Bespeak::select('name','address','keep_time','year','remark')->where(['mobile'=>$mobile,'type'=>$type])->get()->toArray();
+        }
+
+        foreach($res as &$v){
+            $v['name'] = mb_substr($v['name'],0,1,'utf-8').'***';
+            $v['address'] = mb_substr($v['address'],0,5,'utf-8').'***';
+            if(!empty($v['create_time'])) $v['create_time'] = substr($v['create_time'],0,10);
+        }
+
         if($res){
             splash('success','',$res);
         }else{
@@ -303,7 +297,6 @@ class MainController extends Controller
         }
         $pagination = GetPage($total_count,$limit,$p,'ajax_page');
 
-        $data['body'] = 'retrofit';
         $data['title'] = '室内翻新';
         $data['keywords'] = '';
         $data['description'] = '';

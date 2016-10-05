@@ -1,7 +1,7 @@
 @extends('retrofit')
 
 @section('retrofit-info')
-    <ul class="retrofit-tab retrofit-info">
+    <ul class="tab-list tab-menu">
         <li>服务介绍：</li>
         <li><a href="#1" class="curr">服务简介</a></li>
         <li><a href="#2">服务流程</a></li>
@@ -77,10 +77,10 @@
     <table class="wall-price f-content"  border="1" cellpadding="3">
         <tr class="table-th">
             <td width="150">服务名称</td>
-            <td width="240">服务内容</td>
+            <td width="230">服务内容</td>
             <td width="75">单位</td>
             <td width="110">单价（元）</td>
-            <td width="270">施工周期及预期</td>
+            <td width="280">施工周期及预期</td>
             <td width="295">适应场景</td>
         </tr>
         <tr class="row-gray">
@@ -112,7 +112,7 @@
             <td>上门检测，成品保护，旧墙铲除 基层找平，打磨刷漆，清理归位</td>
             <td>平米</td>
             <td>72</td>
-            <td>7天左右，防裂网8元/平米 最低1200元起</td>
+            <td>七天左右，防裂网8元/平米 最低1200元起</td>
             <td>发霉脱落 开裂粉化</td>
         </tr>
     </table>
