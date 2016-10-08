@@ -984,13 +984,13 @@ button{
     color:#fe7902;
 }
 .about-list{
-    width:845px;
+    width:870px;
     float:right;
     margin-right: 5px;
     min-height: 400px;
     border:1px solid #ddd;
     background-color: #fafafa;
-    padding: 0 42px 15px;
+    padding: 0 30px 15px;
 }
 .about-list h2{
     border-bottom: 1px solid #ddd;
@@ -1026,8 +1026,7 @@ button{
     padding-right:10px;
 }
 .about-us p{
-    line-height: 20px;
-    margin:10px 0;
+    line-height: 30px;
     font-size: 14px;
 }
 /*about end*/
@@ -1376,6 +1375,10 @@ button{
 }
 /*right-fixed结束*/
 /*biadu map*/
+#MyMap{
+    width:860px;
+    height:400px;
+}
 #mask{
     width:auto !important;
     min-width: 1200px;

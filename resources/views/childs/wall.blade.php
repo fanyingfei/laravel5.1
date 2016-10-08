@@ -70,7 +70,7 @@
             <div class="flow-right">
                 <div class="flow-img"><img src="http://ww2.sinaimg.cn/mw690/ce768b7ajw1f8f0gp952mj20dy09xmxh.jpg" /></div>
                 <div class="flow-step"><strong>06</strong><span>售后保证</span></div>
-                <div class="flow-content">施工完成后，我们为您提供一年质保期，全铲除型质保两年。质保信息可在官网查询</div>
+                <div class="flow-content">施工完成后，我们为您提供一年质保期，全铲除型质保两年。质保信息<a target="_blank" href="/about/qua">「查询地址」</a></div>
             </div>
         </div>
     </div>

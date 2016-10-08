@@ -24,7 +24,7 @@
                 <li @if ( $data['body'] == 'floor') class="cur-nav" @endif><a href="/floor">木质地板</a></li>
                 <li @if ( $data['body'] == 'events') class="cur-nav" @endif><a href="/events">动态资讯</a></li>
                 <li class="last"><a href="javascript:bespeak()">在线预约</a></li>
-                <li class="contact"><p>免费预约电话</p><p>13524112936</p></li>
+                <li class="contact"><p>免费预约电话</p><p>13052057882</p></li>
             </ul>
         </div>
     </div>
@@ -33,7 +33,7 @@
     </div>
     <div class="footer">
         <p>
-            <span>免费服务热线：13524112936</span>
+            <span>免费服务热线：13052057882</span>
             <span>客服QQ：<a rel="external nofollow" target="_blank" href="http://wpa.qq.com/msgrd?uin=605022496&site=qq&menu=yes">605022496</a></span>
             <span>服务邮箱：605022496@qq.com</span>
             <span>工作时间：周一至周日 09:00-22:00</span>
