@@ -37,7 +37,7 @@ Route::get('/fitment/img/{id}', 'MainController@fitment_img');
 
 Route::get('/wall', 'MainController@retrofit');
 Route::get('/part','MainController@retrofit_part');
-Route::get('/page/{curr}/{p}','MainController@retrofit_page');
+Route::get('/page/{curr}','MainController@retrofit_page');
 
 //后台路由
 Route::get('/admin/login', ['as' => 'login', 'uses'=>'AdminController@login']);

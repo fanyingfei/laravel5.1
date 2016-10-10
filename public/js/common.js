@@ -111,10 +111,9 @@ function change_tab(){
 function footer_bottom(){
     var win_height = $(window).height();
     var footer_top = $('.footer').offset().top;
+    var nav_height = $('.nav').height();
     var footer_height = $('.footer').height();
     if(footer_top + footer_height < win_height){
-        $('.footer').addClass('footer-bottom');
-    }else{
-        if($('.footer').hasClass('footer-bottom')) $('.footer').removeClass('footer-bottom');
+        $('.container').css('height',win_height - footer_height - nav_height -126);
     }
 }

@@ -35,7 +35,6 @@ button{
 .container{
     overflow: auto;
     position: relative;
-    min-height: 400px;
 }
 .crumb-bg{
     position: relative;
@@ -614,6 +613,17 @@ button{
     background-repeat: no-repeat;
     background-size: 1920px 320px;
 }
+.part-filter{
+    border:0;
+    width: auto;
+    margin-top:-15px;
+}
+.part-filter dl{
+    padding-left:20px;
+}
+.part-filter dl dt{
+    padding-left:0;
+}
 .retrofit-wrapper{
     padding:0 20px;
     width: 1160px;
@@ -708,7 +718,7 @@ button{
     font-size:15px;
 }
 .part-step-text{
-    float:right;
+    float:left;
     width:420px;
     position: relative;
     height: 1160px;
@@ -1023,7 +1033,7 @@ button{
     line-height: 30px;;
 }
 .result-list p span{
-    padding-right:10px;
+    padding-right:20px;
 }
 .about-us p{
     line-height: 30px;
@@ -1217,10 +1227,6 @@ button{
     padding: 20px 0px;
     margin-top:80px;
 }
-.footer-bottom{
-    position: absolute;
-    bottom: 0;
-}
 .footer p {
     line-height: 32px;
 }
@@ -1378,6 +1384,7 @@ button{
 #MyMap{
     width:860px;
     height:400px;
+    display: none;
 }
 #mask{
     width:auto !important;

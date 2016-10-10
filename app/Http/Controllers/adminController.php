@@ -270,7 +270,7 @@ class AdminController extends Controller
             }
 
             if(empty($name) || empty($mobile) || empty($address)) splash('error','请填写完整信息');
-            if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
+            if(!preg_match("/^1[345789]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
             if(empty($id)) $res = $id = Bespeak::insertGetId($data);
             else $res = Bespeak::where('rec_id', $id)->update($data);
         }else{

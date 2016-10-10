@@ -245,20 +245,16 @@ class MainController extends Controller
     public function retrofit_part(){
         $data = $this->out_retrofit('part');
         $data['body'] = 'part';
-        $space_res = Base::select('name','sign_id')->where('type', self::space_type)->get()->toArray();
-        $space_list = array_column($space_res,'name','sign_id');
-        foreach($data['list'] as &$row){
-            $type_name = empty($space_list[$row['type']]) ? '' : '【'.$space_list[$row['type']].'】';
-            $type_name = $type_name == '【其他】' ? '' : $type_name;
-            $row['title'] = $type_name.$row['title'];
-        }
+        $space_res = Base::select('name','sign_id')->where('type', self::space_type)->where('sign_id', '!=' , 0)->orderBy('sort', 'desc')->get()->toArray();
+
+        $data['space_list'] = $space_res;
         return view('childs.part')->with('data', $data);
     }
 
     public function data_query(){
-        $mobile = intval($_POST['mobile']);
+        $mobile = trim($_POST['mobile']);
         if(empty($mobile)) splash('error','请输入手机号');
-        if(!preg_match("/^1[34578]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
+        if(!preg_match("/^1[345789]{1}\d{9}$/",$mobile)) splash('error','请输入正确手机号');
 
         $type = isset($_POST['t']) ? $_POST['t'] : 'all';
         if($type == 'all'){
@@ -280,20 +276,27 @@ class MainController extends Controller
         }
     }
 
-    public function retrofit_page($curr , $p){
-        $data = $this->out_retrofit($curr,$p);
+    public function retrofit_page($curr){
+        $t = intval($_REQUEST['t']);
+        $p = intval($_REQUEST['p']);
+        $data = $this->out_retrofit($curr,$p,$t);
         echo json_encode(array('list'=>$data['list'],'page'=>$data['pagination']));
     }
 
-    public function out_retrofit($curr = 'wall' , $p = 0){
+    public function out_retrofit($curr = 'wall' , $p = 0 , $t = 0){
         $limit = 12;
         if($p > 0) $p--;
         if($curr == 'wall'){
             $total_count = Retrofit::where("type",0)->count();
             $list = Retrofit::where("type",0)->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }else{
-            $total_count = Retrofit::where("type",'>',0)->count();
-            $list = Retrofit::where("type",'>',0)->orderBy('type', 'asc')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            if($t == 0){
+                $total_count = Retrofit::where("type",'!=',0)->count();
+                $list = Retrofit::where("type",'!=',0)->orderBy('type', 'asc')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            }else{
+                $total_count = Retrofit::where("type",$t)->count();
+                $list = Retrofit::where("type",$t)->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            }
         }
         $pagination = GetPage($total_count,$limit,$p,'ajax_page');
 
