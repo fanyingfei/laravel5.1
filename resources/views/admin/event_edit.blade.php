@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('admin.admin')
 
 @section('content')
 <div class="edit-body" xmlns="http://www.w3.org/1999/html">

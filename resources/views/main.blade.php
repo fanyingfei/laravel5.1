@@ -10,13 +10,14 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/common.css"/>
     <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
 <body class="{{ $data['body'] }}">
     <div class="nav">
         <div class="w1200 mc">
             <ul class="menu">
-                <li class="logo"><a href="/"><img src="/img/icon/logo.png"/></a></li>
+                <li class="logo"><a href="/"><img title="上海洵直装饰" src="/img/icon/logo.png"/></a></li>
                 <li @if ( $data['body'] == 'home') class="cur-nav" @endif><a href="/">官网首页</a></li>
                 <li @if ( $data['body'] == 'wall') class="cur-nav" @endif><a href="/wall">墙面刷新</a></li>
                 <li @if ( $data['body'] == 'part') class="cur-nav" @endif><a href="/part">局部翻新</a></li>
@@ -48,7 +49,7 @@
         </p>
         <p>
             <span>Copyright2012-2016 www.shuaxin.co,All Rights Reserved</span>
-            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备15072739号-1</a></span>
+            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备15072739号-1</a><span id="touch">&nbsp;&nbsp;| 手机版</span></span>
         </p>
         <input id="token" type="hidden" value="{{ csrf_token() }}" >
     </div>

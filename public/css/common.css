@@ -43,6 +43,9 @@ button{
     margin-bottom: 30px;
     background-color: #E5E0DC;
 }
+#touch{
+    display: none;
+}
 /*通用结束*/
 /*nav导航*/
 .nav{
@@ -74,7 +77,7 @@ button{
     height: 55px;
     padding-top:45px;
     display: block;
-    width: 115px;
+    width: 110px;
     float: right;
     font-weight: bold;
     background-image: url('/img/icon/h_line.png');
@@ -90,8 +93,10 @@ button{
     background-image: none;
 }
 .menu .logo a img{
-    width:125px;
-    height:65px;
+    width:185px;
+}
+.menu .logo{
+    margin-right:50px;
 }
 .menu .last a{
     background-image: none;
@@ -421,7 +426,7 @@ button{
 	margin-top:10px;
 }
 .events-info .title a{
-    font-size:1.8em;
+    font-size:2em;
     height: 35px;
     display: block;
     overflow:hidden;
@@ -460,9 +465,10 @@ button{
     padding-top: 1.5em;
     padding-bottom: 2em;
     position: relative;
-    line-height: 1.5em;
+    line-height: 1.7em;
+    font-weight: 100;
     color:#333;
-    font-size:14px;
+    font-size:16px;
 }
 .events-fixed{
     position: fixed;
@@ -1033,7 +1039,7 @@ button{
     line-height: 30px;;
 }
 .result-list p span{
-    padding-right:20px;
+    display: block;
 }
 .about-us p{
     line-height: 30px;
@@ -1091,7 +1097,10 @@ button{
 .f-loading-two {
     position: absolute;
     display: block;
-    background: url('/img/icon/loading.gif') no-repeat center center;
+    background-image: url('/img/icon/loading.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50px 54px;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -1241,6 +1250,9 @@ button{
     text-decoration: underline;
     color: #fe7902;
 }
+.footer #touch{
+    cursor: pointer;
+}
 /*footer结束*/
 /*right-fixed*/
 
@@ -1348,12 +1360,12 @@ button{
     cursor: pointer;
     float: left;
     color: #fff;
-    width:150px;
+    width:337px;
     text-align: center;
     font-weight: bold;
     font-size:18px;
+    border-radius: 2px;
     background-color: #ed7000;
-    font-family: 'Helvetica','Microsoft YaHei','Arial';
 }
 .close{
     width:20px;

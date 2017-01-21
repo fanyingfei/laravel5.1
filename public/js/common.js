@@ -48,10 +48,21 @@ $(function(){
 
     window.onresize=function(){footer_bottom();}
 
+
+    $("#pc").click(function(){
+        $.cookie('pc', 1 , { path : '/' });
+        window.location.href='/';
+    });
+
+    $("#touch").click(function(){
+        $.cookie('pc', 0 , { path : '/' });
+        window.location.href='/';
+    });
+
     //监听到顶部点击事件
     $("#top").click(function(){$('html,body').animate({scrollTop: 0}, 500);})
 
-    $('body').on('click', '.close', function(){$('.modal-bg').hide(300);})
+    $('body').on('click', '.close', function(){$('.modal-bg').hide();})
 
     $('body').on('click', '.bespeak-submit', function(){
         var name = $('.b-name').val();
@@ -78,7 +89,7 @@ $(function(){
             success:function(obj){
                 if(obj.status == 'success'){
                     alert('预约成功');
-                    $('.modal-bg').hide(300);
+                    $('.modal-bg').hide();
                 }else{
                     alert(obj.msg);
                 }
@@ -114,6 +125,6 @@ function footer_bottom(){
     var nav_height = $('.nav').height();
     var footer_height = $('.footer').height();
     if(footer_top + footer_height < win_height){
-        $('.container').css('height',win_height - footer_height - nav_height -126);
+        $('.container').css('height',win_height - footer_height - nav_height -100);
     }
 }

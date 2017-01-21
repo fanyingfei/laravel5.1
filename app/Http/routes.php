@@ -13,11 +13,8 @@
 
 Route::get('/', 'MainController@index');
 
-Route::get('/faq', 'MainController@faq');
-
-
-Route::get('/events/{p?}', 'MainController@events_ev')->where('p', '[0-9]+');
-Route::get('/information/{p?}', 'MainController@events_in')->where('p', '[0-9]+');
+Route::get('/events/{p?}', 'MainController@events')->where('p', '[0-9]+');
+Route::get('/information/{p?}', 'MainController@information')->where('p', '[0-9]+');
 
 Route::get('/show/{id}', 'MainController@show');
 
