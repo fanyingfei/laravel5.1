@@ -48,7 +48,7 @@ class MainController extends Controller
         $data['case_list'] = $case_list;
         $data['article_list'] = $articles_res;
         $data['banner_list'] = $banner_list;
-        return view('index')->with('data', $data);
+        return view('main.index')->with('data', $data);
     }
 
     public function about($name=''){
@@ -59,25 +59,25 @@ class MainController extends Controller
         $data['curr'] =$name;
         $data['keywords'] = '';
         $data['description'] = '';
-        return view('about')->with('data', $data);
+        return view('main.about')->with('data', $data);
     }
 
     public function events($p = 0){
         //动态
         $data = $this->out_events($p , 1);
         $data['curr'] = 'ev';
-        $data['title'] = '公司动态';
+        $data['title'] = '公司动态_上海洵直装饰公司';
         $data['nav_title'] = '公司动态';
-        return view('events')->with('data', $data);
+        return view('main.events')->with('data', $data);
     }
 
     public function information($p = 0){
         //资讯
         $data = $this->out_events($p , 2);
         $data['curr'] = 'in';
-        $data['title'] = '公司资讯';
+        $data['title'] = '公司资讯_上海洵直装饰公司';
         $data['nav_title'] = '公司资讯';
-        return view('events')->with('data', $data);
+        return view('main.events')->with('data', $data);
     }
 
     public function out_events($p , $type = 0){
@@ -116,7 +116,7 @@ class MainController extends Controller
         $data['keywords'] = $result['keywords'];
         $data['description'] = $result['description'];
         $data['curr'] = $result['type'] == 1 ? 'ev' : 'in';
-        return view('show')->with(['data'=>$data , 'info'=>$result]);
+        return view('main.show')->with(['data'=>$data , 'info'=>$result]);
     }
 
     public function fitment_img($id){
@@ -127,22 +127,22 @@ class MainController extends Controller
 
     public function fitment($p = 0){
         $data = $this->out_fitment($p);
-        return view('fitment')->with('data', $data);
+        return view('main.fitment')->with('data', $data);
     }
 
     public function fitment_ts($style , $p = 0){
         $data = $this->out_fitment($p,$style);
-        return view('fitment')->with('data', $data);
+        return view('main.fitment')->with('data', $data);
     }
 
     public function fitment_hs($house , $p = 0){
         $data = $this->out_fitment($p,0,$house);
-        return view('fitment')->with('data', $data);
+        return view('main.fitment')->with('data', $data);
     }
 
     public function fitment_filter($style, $house , $p = 0){
         $data = $this->out_fitment($p,$style,$house);
-        return view('fitment')->with('data', $data);
+        return view('main.fitment')->with('data', $data);
     }
 
     public function out_fitment($p,$fitment_curr=0,$house_curr=0){
@@ -194,7 +194,7 @@ class MainController extends Controller
         $pagination = GetPage($total_count,$limit,$p);
 
         $data['body'] = 'fitment';
-        $data['title'] = '整体翻新';
+        $data['title'] = '整体翻新_上海洵直装饰公司';
         $data['nav_title'] = '整体翻新';
         $data['keywords'] = '';
         $data['description'] = '';
@@ -213,11 +213,11 @@ class MainController extends Controller
         $data['list'] = $list_res;
         $data['body'] = 'floor';
         $data['curr'] = 'hot';
-        $data['title'] = '自热地板';
+        $data['title'] = '自热地板_上海洵直装饰公司';
         $data['nav_title'] = '自热地板';
         $data['keywords'] = '';
         $data['description'] = '';
-        return view('hot')->with('data', $data);
+        return view('main.hot')->with('data', $data);
     }
 
     public function floor_general(){
@@ -225,30 +225,30 @@ class MainController extends Controller
         $data['list'] = $list_res;
         $data['body'] = 'floor';
         $data['curr'] = 'common';
-        $data['title'] = '普通地板';
+        $data['title'] = '普通地板_上海洵直装饰公司';
         $data['nav_title'] = '普通地板';
         $data['keywords'] = '';
         $data['description'] = '';
-        return view('general')->with('data', $data);
+        return view('main.general')->with('data', $data);
     }
 
     public function retrofit(){
         $data = $this->out_retrofit();
         $data['body'] = 'wall';
-        $data['title'] = '墙面翻新';
+        $data['title'] = '墙面翻新_上海洵直装饰公司';
         $data['nav_title'] = '墙面翻新';
-        return view('wall')->with('data', $data);
+        return view('main.wall')->with('data', $data);
     }
 
     public function retrofit_part(){
         $data = $this->out_retrofit('part');
         $data['body'] = 'part';
-        $data['title'] = '局部翻新';
+        $data['title'] = '局部翻新_上海洵直装饰公司';
         $data['nav_title'] = '局部翻新';
         $space_res = Base::select('name','sign_id')->where('type', self::space_type)->where('sign_id', '!=' , 0)->orderBy('sort', 'desc')->get()->toArray();
 
         $data['space_list'] = $space_res;
-        return view('part')->with('data', $data);
+        return view('main.part')->with('data', $data);
     }
 
     public function data_query(){

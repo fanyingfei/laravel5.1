@@ -39,7 +39,7 @@ class AdminController extends Controller
         $password = $_POST['password'];
         if(empty($username) || empty($password)) splash('error','请输入用户名和密码');
         if($username !== 'fanfan') splash('error','用户名错误');
-        if($password !== 'f53bafd8c2b602abca59e4c2854440d8') splash('error','密码错误');
+        if($password !== '36f17c3939ac3e7b2fc9396fa8e953ea') splash('error','密码错误');
 
         Session::put('admin', 'fanfan');
         Session::save();
@@ -196,7 +196,7 @@ class AdminController extends Controller
 
     public function delete(){
         $t = $_REQUEST['t'];
-        $ids = trim($_POST['ids']);
+        $ids = trim($_REQUEST['ids']);
         if(empty($ids)) splash('error','参数有误');
         $ids = explode(',',$ids);
 
@@ -205,6 +205,7 @@ class AdminController extends Controller
         elseif($t == 'retrofit') $res = Retrofit::whereIn('rec_id', $ids)->delete();
         elseif($t == 'floor') $res = Floor::whereIn('rec_id', $ids)->delete();
         elseif($t == 'event') $res = Article::whereIn('rec_id', $ids)->delete();
+        elseif($t == 'bespeak') $res = Bespeak::whereIn('rec_id', $ids)->delete();
         else splash('error','参数有误');
 
         if($res){

@@ -7,6 +7,7 @@
     <meta name="keywords" content="{{ $data['keywords'] }}" />
     <meta name="description" content="{{ $data['description'] }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="baidu-site-verification" content="Pg0lDPlzCA" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/common.css"/>
     <script type="text/javascript" src="/js/jquery.js"></script>
