@@ -13,6 +13,8 @@
 
 Route::get('/', 'MainController@index');
 
+Route::get('/access', 'MainController@access');
+
 Route::get('/events/{p?}', 'MainController@events')->where('p', '[0-9]+');
 Route::get('/information/{p?}', 'MainController@information')->where('p', '[0-9]+');
 
@@ -49,6 +51,7 @@ Route::group(['prefix' => 'admin','middleware' =>'myauth'], function()
     Route::get('floor', 'AdminController@floor');
     Route::get('event', 'AdminController@event');
     Route::get('bespeak', 'AdminController@bespeak');
+    Route::get('access', 'AdminController@access');
 
     Route::get('list', 'AdminController@data_list');
     Route::get('edit', 'AdminController@edit');

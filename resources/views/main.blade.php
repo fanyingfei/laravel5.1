@@ -7,7 +7,7 @@
     <meta name="keywords" content="{{ $data['keywords'] }}" />
     <meta name="description" content="{{ $data['description'] }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="baidu-site-verification" content="Pg0lDPlzCA" />
+    <meta name="baidu-site-verification" content="JoJKV06MQ4" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/common.css"/>
     <script type="text/javascript" src="/js/jquery.js"></script>
@@ -59,6 +59,32 @@
     <div class="modal-bg"></div>
 </body>
 <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6aa19a54473374bd68329f9426602d8d";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+
+$(document).ready(function(){
+    var cur_url = window.location.href;
+    $.get("/access",{'url':cur_url},function(){});
+});
+
 function bespeak(){
     var html = '';
     html += '<div class="bespeak-info"><p class="close">×</p>';

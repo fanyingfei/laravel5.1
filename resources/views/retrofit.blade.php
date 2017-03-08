@@ -57,8 +57,8 @@ $(function(){
         html += '<div class=c></div></div></div></div></div></div>';
         $('.modal-bg').html(html);
 	    jssor_init();
-	    $('.modal-bg').show();
 	    $('.slide-'+cur_index+' .w img').trigger('click');
+	    $('.modal-bg').show();
 	})
 
     $(".fitment-filter dd a").click(function(){

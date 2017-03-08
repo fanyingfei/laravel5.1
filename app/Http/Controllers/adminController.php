@@ -12,6 +12,7 @@ use App\Model\Image;
 use App\Model\Retrofit;
 use App\Model\Floor;
 use App\Model\Bespeak;
+use App\Model\Access;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -82,6 +83,11 @@ class AdminController extends Controller
         return view('admin.bespeak')->with('data', $data);
     }
 
+    public function access(){
+        $data['curr'] = 'access';
+        return view('admin.access')->with('data', $data);
+    }
+
     public function data_list(){
         $limit = empty($_REQUEST['limit']) ? 10 : $_REQUEST['limit'];
         $offset = empty($_REQUEST['order']) ? 0 : $_REQUEST['offset'];
@@ -147,6 +153,9 @@ class AdminController extends Controller
                 $v['type'] = empty($bespeak_type[$v['type']]) ? '未知' : $bespeak_type[$v['type']];
                 $v['op'] = '<a class="edit-btn" href="/admin/edit?t=bespeak&id='.$v['rec_id'].'">编辑</a>';
             }
+        }elseif($t == 'access'){
+            $data['total'] = Access::count();
+            $data['rows'] = Access::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
         }
         echo json_encode($data);
     }
@@ -206,6 +215,7 @@ class AdminController extends Controller
         elseif($t == 'floor') $res = Floor::whereIn('rec_id', $ids)->delete();
         elseif($t == 'event') $res = Article::whereIn('rec_id', $ids)->delete();
         elseif($t == 'bespeak') $res = Bespeak::whereIn('rec_id', $ids)->delete();
+        elseif($t == 'access') $res = Access::whereIn('rec_id', $ids)->delete();
         else splash('error','参数有误');
 
         if($res){

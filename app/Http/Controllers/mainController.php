@@ -10,6 +10,7 @@ use App\Model\Image;
 use App\Model\Retrofit;
 use App\Model\Bespeak;
 use App\Model\Floor;
+use App\Model\Access;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Cookie;
@@ -25,6 +26,7 @@ class MainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $articles_res = Article::select('rec_id as id','title')->orderBy('sort', 'desc')->take(10)->get()->toArray();
@@ -307,6 +309,15 @@ class MainController extends Controller
         $data['curr'] = $curr;
         $data['list'] = $list;
         return $data;
+    }
+
+
+    public function access(){
+        $ip = get_real_ip();
+        $url = $_REQUEST['url'];
+        $data = array('url'=>$url,'ip'=>$ip,'create_time'=>date('Y-m-d H:i:s'));
+        Access::insert($data);
+        echo 'success';
     }
 
 }
