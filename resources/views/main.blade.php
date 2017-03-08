@@ -85,17 +85,6 @@ $(document).ready(function(){
     $.get("/access",{'url':cur_url},function(){});
 });
 
-function bespeak(){
-    var html = '';
-    html += '<div class="bespeak-info"><p class="close">×</p>';
-    html += '<div class="bespeak-row"><div>姓名</div><div><input class="b-name" type="text" maxlength="30" ></div></div>';
-    html += '<div class="bespeak-row"><div>手机</div><div><input class="b-mobile" type="text" maxlength="11" ></div></div>';
-    html += '<div class="bespeak-row"><div>地址</div><div><input class="b-address" type="text" ></div></div>';
-    html += '<div class="bespeak-row"><div>留言</div><div><textarea class="b-remark" type="text" ></textarea></div></div>';
-    html += '<div class="bespeak-row"><div></div><div><div class="bespeak-submit">马上预约</div></div></div></div>';
-    $('.modal-bg').html(html);
-    $('.modal-bg').show();
-}
 </script>
 @yield('script')
 </html>

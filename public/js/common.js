@@ -64,6 +64,10 @@ $(function(){
 
     $('body').on('click', '.close', function(){$('.modal-bg').hide();})
 
+    $('body').on('click', '.modal-bg', function(){$('.modal-bg').hide();})
+
+    $('body').on('click', '.modal-bg > div', function(){return false;})
+
     $('body').on('click', '.bespeak-submit', function(){
         var name = $('.b-name').val();
         var mobile = $('.b-mobile').val();
@@ -127,4 +131,16 @@ function footer_bottom(){
     if(footer_top + footer_height < win_height){
         $('.container').css('height',win_height - footer_height - nav_height -100);
     }
+}
+
+function bespeak(){
+    var html = '';
+    html += '<div class="bespeak-info"><p class="close">×</p>';
+    html += '<div class="bespeak-row"><div>姓名</div><div><input class="b-name" type="text" maxlength="30" ></div></div>';
+    html += '<div class="bespeak-row"><div>手机</div><div><input class="b-mobile" type="text" maxlength="11" ></div></div>';
+    html += '<div class="bespeak-row"><div>地址</div><div><input class="b-address" type="text" ></div></div>';
+    html += '<div class="bespeak-row"><div>留言</div><div><textarea class="b-remark" type="text" ></textarea></div></div>';
+    html += '<div class="bespeak-row"><div></div><div><div class="bespeak-submit">马上预约</div></div></div></div>';
+    $('.modal-bg').html(html);
+    $('.modal-bg').show();
 }

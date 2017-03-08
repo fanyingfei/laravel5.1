@@ -154,6 +154,7 @@ class AdminController extends Controller
                 $v['op'] = '<a class="edit-btn" href="/admin/edit?t=bespeak&id='.$v['rec_id'].'">编辑</a>';
             }
         }elseif($t == 'access'){
+            $order = 'desc';
             $data['total'] = Access::count();
             $data['rows'] = Access::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
         }
