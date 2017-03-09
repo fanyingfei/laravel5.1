@@ -52,9 +52,6 @@ button{
     margin-bottom: 30px;
     background-color: #E5E0DC;
 }
-#touch{
-    display: none;
-}
 /*通用结束*/
 /*nav导航*/
 .nav{
@@ -1248,9 +1245,6 @@ button{
     text-decoration: underline;
     color: #fe7902;
 }
-.footer #touch{
-    cursor: pointer;
-}
 /*footer结束*/
 /*right-fixed*/
 
@@ -1417,3 +1411,6 @@ button{
     font: 13px 'Microsoft YaHei','Arial' !important;
 }
 /*baidu map*/
+body.m{
+    width:1200px;
+}

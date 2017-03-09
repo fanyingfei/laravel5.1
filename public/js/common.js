@@ -44,17 +44,6 @@ $(function(){
         $('.f-content').eq(index).fadeIn().siblings().hide();
     });
 
-
-    $("#pc").click(function(){
-        $.cookie('pc', 1 , { path : '/' });
-        window.location.href='/';
-    });
-
-    $("#touch").click(function(){
-        $.cookie('pc', 0 , { path : '/' });
-        window.location.href='/';
-    });
-
     //监听到顶部点击事件
     $("#top").click(function(){$('html,body').animate({scrollTop: 0}, 500);})
 

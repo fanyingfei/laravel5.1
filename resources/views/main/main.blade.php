@@ -6,7 +6,7 @@
     <title>{{ $data['title'] }}</title>
     <meta name="keywords" content="{{ $data['keywords'] }}" />
     <meta name="description" content="{{ $data['description'] }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.4, minimum-scale=0.2, maximum-scale=0.8, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.3, minimum-scale=0.3, maximum-scale=0.8, user-scalable=yes" />
     <meta name="baidu-site-verification" content="JoJKV06MQ4" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/common.css"/>
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
-<body class="{{ $data['body'] }}">
+<body class="{{ $data['body'] }} {{ $data['judge'] }}">
     <div class="wrap">
         <div class="nav">
             <div class="w1200 mc">
@@ -51,7 +51,7 @@
         </p>
         <p>
             <span>Copyright2015-2017 All Rights Reserved</span>
-            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">16006931号</a><span id="touch">&nbsp;&nbsp;| 手机版</span></span>
+            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">16006931号</a></span>
         </p>
         <input id="token" type="hidden" value="{{ csrf_token() }}" >
     </div>
