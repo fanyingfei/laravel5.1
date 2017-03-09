@@ -99,7 +99,6 @@ function get_ip_local($queryIP){
     $location = post_fsockopen($url);
     $location = json_decode($location);
 
-
     $loc = "";
     if($location===FALSE) return "unknow";
 
@@ -196,6 +195,65 @@ function post_fsockopen($url = '', $post = array() , $method = 'POST', $header =
         $header = substr($reponse, 0, $pos);
         $body = substr($reponse, $pos + 2 * strlen($crlf));
         return $body;
+    }
+}
+
+function isCrawler() {
+    $agent= strtolower($_SERVER['HTTP_USER_AGENT']);
+    if (!empty($agent)) {
+        $spiderSite= array(
+            "TencentTraveler",
+            "Baiduspider+",
+            "BaiduGame",
+            "Googlebot",
+            "msnbot",
+            "Sosospider+",
+            "Sogou web spider",
+            "ia_archiver",
+            "Yahoo! Slurp",
+            "YoudaoBot",
+            "Yahoo Slurp",
+            "MSNBot",
+            "Java (Often spam bot)",
+            "BaiDuSpider",
+            "Voila",
+            "Yandex bot",
+            "BSpider",
+            "twiceler",
+            "Sogou Spider",
+            "Speedy Spider",
+            "Google AdSense",
+            "Heritrix",
+            "Python-urllib",
+            "Alexa (IA Archiver)",
+            "Ask",
+            "Exabot",
+            "Custo",
+            "OutfoxBot/YodaoBot",
+            "yacy",
+            "SurveyBot",
+            "legs",
+            "lwp-trivial",
+            "Nutch",
+            "StackRambler",
+            "The web archive (IA Archiver)",
+            "Perl tool",
+            "MJ12bot",
+            "Netcraft",
+            "MSIECrawler",
+            "WGet tools",
+            "larbin",
+            "Fish search",
+        );
+        foreach($spiderSite as $val) {
+            $str = strtolower($val);
+            if (strpos($agent, $str) !== false) {
+                return 1;
+            }
+        }
+        return 0;
+    } else {
+        return 0;
     }
 }
 

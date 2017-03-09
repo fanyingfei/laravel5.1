@@ -1,4 +1,4 @@
-@extends('main')
+@extends('main.main')
 
 @section('content')
     <div class="fitment-bg  crumb-bg"></div>
@@ -23,7 +23,7 @@
                 <div class=" fitment-list retrofit-list">
                     @foreach ($data['list'] as $key=>$row)
                         <div class="fitment-one type-id-{{ $row['type'] }} @if ( ($key + 1)%3== 0) f-three @endif">
-                            <a class="fitment-img"><img src="{{ $row['img_url'] }}" /><div></div></a>
+                            <a class="fitment-img"><img src="{{ $row['img_url'] }}" /></a>
                             <p>{{ $row['title'] }}</p>
                         </div>
                     @endforeach
@@ -41,14 +41,22 @@
 <script>
 $(function(){
     $('body').on('click', '.fitment-img', function(){
+        var aft_html = '';
+        var bef_html = '';
         var cur_index = $(this).parent().index();
         var html = '<div class="modal-container"><p class="close">×</p>';
 	    html += '<div id="slider1_container"><div u="loading" class="f-loading">';
 	    html += '<div class="f-loading-one"></div><div class="f-loading-two"></div></div>';
 	    html += '<div u="slides" class="sildes-container">';
         $('.fitment-img img').each(function(k,v){
-             html += '<div><img u="image" src="'+$(v).attr('src')+'" /><img u="thumb" src="'+$(v).attr('src')+'" /></div>';
+            if(k >= cur_index){
+                aft_html += '<div><img u="image" src="'+$(v).attr('src')+'" /><img u="thumb" src="'+$(v).attr('src')+'" /></div>';
+            }else{
+                bef_html += '<div><img u="image" src="'+$(v).attr('src')+'" /><img u="thumb" src="'+$(v).attr('src')+'" /></div>';
+            }
         })
+        html += aft_html;
+        html += bef_html;
 	    html += '</div><span u="arrowleft" class="jssora05l"></span>';
 	    html += '<span u="arrowright" class="jssora05r"></span>';
 	    html += '<div u="thumbnavigator" class="jssort01">';
@@ -57,7 +65,6 @@ $(function(){
         html += '<div class=c></div></div></div></div></div></div>';
         $('.modal-bg').html(html);
 	    jssor_init();
-	    $('.slide-'+cur_index+' .w img').trigger('click');
 	    $('.modal-bg').show();
 	})
 

@@ -11,6 +11,15 @@ body {
     position: relative;
     height: 100%;
 }
+.wrap{
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -218px;
+    padding-bottom: 218px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 a{
     cursor: pointer;
     color: #8c8c8c;
@@ -578,24 +587,13 @@ button{
     line-height: 42px;
     color: #000;
 }
-.fitment-one p.detail {
-    height: 36px;
-    line-height: 18px;
-    background: #f7f7f7;
-    padding: 6px;
-    border-bottom: none;
-    color: #6f6d6c;
-    font-size: 12px;
-    position: relative;
-}
-.fitment-one p.detail span i {
+.fitment-one p span i {
     color: #d80c18;
     font-style: normal;
     padding-left:20px;
 }
-.fitment-one p.detail span.m8 {
-    display: block;
-    padding:10px 0;
+.fitment-one p span.m8 {
+    float:right;
     background: url('/img/icon/img_icon.png') no-repeat left center;
     color: #868483;
 }
@@ -1306,7 +1304,7 @@ button{
     background: rgba(0,6,32,1);
 }
 .bespeak-info{
-    background-color: #fff;
+    background-color: #fafafa;
     padding:50px 36px 5px;
     width:410px;
     position: fixed;

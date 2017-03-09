@@ -6,7 +6,7 @@
     <title>{{ $data['title'] }}</title>
     <meta name="keywords" content="{{ $data['keywords'] }}" />
     <meta name="description" content="{{ $data['description'] }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.4, minimum-scale=0.2, maximum-scale=0.8, user-scalable=yes" />
     <meta name="baidu-site-verification" content="JoJKV06MQ4" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/css/common.css"/>
@@ -15,29 +15,30 @@
     <script type="text/javascript" src="/js/common.js"></script>
 </head>
 <body class="{{ $data['body'] }}">
-    <div class="nav">
-        <div class="w1200 mc">
-            <ul class="menu">
-                <li class="logo"><a href="/"><img title="上海洵直装饰" src="/img/icon/logo.png"/></a></li>
-                <li @if ( $data['body'] == 'home') class="cur-nav" @endif><a href="/">官网首页</a></li>
-                <li @if ( $data['body'] == 'wall') class="cur-nav" @endif><a href="/wall">墙面刷新</a></li>
-                <li @if ( $data['body'] == 'part') class="cur-nav" @endif><a href="/part">局部翻新</a></li>
-                <li @if ( $data['body'] == 'fitment') class="cur-nav" @endif><a href="/fitment">整体翻新</a></li>
-                <li @if ( $data['body'] == 'floor') class="cur-nav" @endif><a href="/floor">木质地板</a></li>
-                <li @if ( $data['body'] == 'events') class="cur-nav" @endif><a href="/events">动态资讯</a></li>
-                <li class="last"><a href="javascript:bespeak()">在线预约</a></li>
-                <li class="contact"><p>免费预约电话</p><p>13052057882</p></li>
-            </ul>
+    <div class="wrap">
+        <div class="nav">
+            <div class="w1200 mc">
+                <ul class="menu">
+                    <li class="logo"><a href="/"><img title="上海洵直装饰" src="/img/icon/logo.png"/></a></li>
+                    <li @if ( $data['body'] == 'home') class="cur-nav" @endif><a href="/">官网首页</a></li>
+                    <li @if ( $data['body'] == 'wall') class="cur-nav" @endif><a href="/wall">墙面刷新</a></li>
+                    <li @if ( $data['body'] == 'part') class="cur-nav" @endif><a href="/part">局部翻新</a></li>
+                    <li @if ( $data['body'] == 'fitment') class="cur-nav" @endif><a href="/fitment">新房装修</a></li>
+                    <li @if ( $data['body'] == 'floor') class="cur-nav" @endif><a href="/floor">木质地板</a></li>
+                    <li @if ( $data['body'] == 'events') class="cur-nav" @endif><a href="/events">动态资讯</a></li>
+                    <li class="last"><a href="javascript:bespeak()">在线预约</a></li>
+                    <li class="contact"><p>免费预约电话</p><p>13052057882</p></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </div>
     <div class="footer">
         <p>
             <span>免费服务热线：13052057882</span>
             <span>客服QQ：<a rel="external nofollow" target="_blank" href="http://wpa.qq.com/msgrd?uin=605022496&site=qq&menu=yes">605022496</a></span>
-            <span>服务邮箱：605022496@qq.com</span>
             <span>工作时间：周一至周日 09:00-22:00</span>
         </p>
         <p>

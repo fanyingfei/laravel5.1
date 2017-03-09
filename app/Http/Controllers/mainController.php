@@ -45,7 +45,7 @@ class MainController extends Controller
         }
 
         $data['body'] = 'home';
-        $data['title'] = '上海洵直装饰公司_墙面刷新_二手房翻新_旧墙翻新';
+        $data['title'] = '上海洵直装饰_墙面刷新_二手房翻新_旧墙翻新';
         $data['nav_title'] = '官网首页';
         $data['keywords'] = '洵直，翻新，刷新，装饰，旧墙翻新';
         $data['description'] = '';
@@ -70,7 +70,7 @@ class MainController extends Controller
         //动态
         $data = $this->out_events($p , 1);
         $data['curr'] = 'ev';
-        $data['title'] = '公司动态_上海洵直装饰公司';
+        $data['title'] = '公司动态_上海洵直装饰';
         $data['nav_title'] = '公司动态';
         return view('main.events')->with('data', $data);
     }
@@ -79,7 +79,7 @@ class MainController extends Controller
         //资讯
         $data = $this->out_events($p , 2);
         $data['curr'] = 'in';
-        $data['title'] = '公司资讯_上海洵直装饰公司';
+        $data['title'] = '公司资讯_上海洵直装饰';
         $data['nav_title'] = '公司资讯';
         return view('main.events')->with('data', $data);
     }
@@ -198,8 +198,8 @@ class MainController extends Controller
         $pagination = GetPage($total_count,$limit,$p);
 
         $data['body'] = 'fitment';
-        $data['title'] = '整体翻新_上海洵直装饰公司';
-        $data['nav_title'] = '整体翻新';
+        $data['title'] = '新房装修_上海洵直装饰';
+        $data['nav_title'] = '新房装修';
         $data['keywords'] = '';
         $data['description'] = '';
         $data['pagination'] = $pagination;
@@ -217,7 +217,7 @@ class MainController extends Controller
         $data['list'] = $list_res;
         $data['body'] = 'floor';
         $data['curr'] = 'hot';
-        $data['title'] = '自热地板_上海洵直装饰公司';
+        $data['title'] = '自热地板_上海洵直装饰';
         $data['nav_title'] = '自热地板';
         $data['keywords'] = '';
         $data['description'] = '';
@@ -229,7 +229,7 @@ class MainController extends Controller
         $data['list'] = $list_res;
         $data['body'] = 'floor';
         $data['curr'] = 'common';
-        $data['title'] = '普通地板_上海洵直装饰公司';
+        $data['title'] = '普通地板_上海洵直装饰';
         $data['nav_title'] = '普通地板';
         $data['keywords'] = '';
         $data['description'] = '';
@@ -239,7 +239,7 @@ class MainController extends Controller
     public function retrofit(){
         $data = $this->out_retrofit();
         $data['body'] = 'wall';
-        $data['title'] = '墙面翻新_上海洵直装饰公司';
+        $data['title'] = '墙面翻新_上海洵直装饰';
         $data['nav_title'] = '墙面翻新';
         return view('main.wall')->with('data', $data);
     }
@@ -247,7 +247,7 @@ class MainController extends Controller
     public function retrofit_part(){
         $data = $this->out_retrofit('part');
         $data['body'] = 'part';
-        $data['title'] = '局部翻新_上海洵直装饰公司';
+        $data['title'] = '局部翻新_上海洵直装饰';
         $data['nav_title'] = '局部翻新';
         $space_res = Base::select('name','sign_id')->where('type', self::space_type)->where('sign_id', '!=' , 0)->orderBy('sort', 'desc')->get()->toArray();
 
@@ -319,7 +319,8 @@ class MainController extends Controller
         if(in_array($ip , array('180.168.183.186'))) return 'admin';
         $url = $_REQUEST['url'];
         $ip_address = get_ip_local($ip);
-        $data = array('url'=>$url,'ip'=>$ip,'ip_address'=>$ip_address,'create_time'=>date('Y-m-d H:i:s'));
+        $iscrawler = isCrawler();
+        $data = array('url'=>$url,'ip'=>$ip,'ip_address'=>$ip_address,'is_crawler'=>$iscrawler,'create_time'=>date('Y-m-d H:i:s'));
         Access::insert($data);
         return 'success';
     }

@@ -157,6 +157,9 @@ class AdminController extends Controller
             $order = 'desc';
             $data['total'] = Access::count();
             $data['rows'] = Access::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
+            foreach($data['rows'] as $key=>&$v){
+                $v['is_crawler'] = empty($v['is_crawler']) ? '否' : '是';
+            }
         }
         echo json_encode($data);
     }
@@ -276,8 +279,8 @@ class AdminController extends Controller
             $data['remark'] = $remark = trim($_POST['remark']);
             $data['create_time'] = date('Y-m-d H:i:s');
             $data['type'] = empty($_POST['type']) ? 0 : $_POST['type'];
-            if($data['type'] == 2 && !empty($_POST['year'])){
-                $data['year'] = intval($_POST['year']);
+            if($data['type'] == 2){
+                $data['year'] = empty($_POST['year']) ? 1 : intval($_POST['year']);
                 $data['keep_time'] = date('Y.m.d').'-'.date('Y.m.d',strtotime('+'.$data['year'].' year'));
             }
 
