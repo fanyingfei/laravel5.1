@@ -35,7 +35,7 @@
         </div>
         <div  class="form-group">
             <label>留言：</label>
-            <input type="text" class="form-control" id="e_remark" value="{{ $info['remark'] }}">
+            <textarea class="form-control" id="e_remark">{{ $info['remark'] }}</textarea>
         </div>
         <div  class="form-group">
             <input type="hidden" id="e_id" value="{{ $info['rec_id'] }}">

@@ -1,4 +1,4 @@
-@extends('floor')
+@extends('main.floor')
 
 @section('floor-content')
     <div class="f-content">

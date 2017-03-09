@@ -1,4 +1,4 @@
-@extends('retrofit')
+@extends('main.retrofit')
 
 @section('retrofit-info')
     <ul class="tab-list tab-menu">

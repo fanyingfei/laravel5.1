@@ -20,6 +20,7 @@
             <th data-sortable="true" data-field="rec_id">ID</th>
             <th data-field="url">URL</th>
             <th data-field="ip">IP</th>
+            <th data-field="ip_address">IP地址</th>
             <th data-sortable="true" data-field="create_time">时间</th>
         </tr>
         </thead>

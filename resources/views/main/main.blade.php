@@ -49,8 +49,8 @@
             <a href="/about/faq">常见问题</a>
         </p>
         <p>
-            <span>Copyright2012-2016 www.shuaxin.co,All Rights Reserved</span>
-            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">粤ICP备15072739号-1</a><span id="touch">&nbsp;&nbsp;| 手机版</span></span>
+            <span>Copyright2015-2017 All Rights Reserved</span>
+            <span>ICP备案：<a rel="nofollow" target="_blank" href="http://www.miitbeian.gov.cn">16006931号</a><span id="touch">&nbsp;&nbsp;| 手机版</span></span>
         </p>
         <input id="token" type="hidden" value="{{ csrf_token() }}" >
     </div>

@@ -29,6 +29,8 @@ class MainController extends Controller
 
     public function index()
     {
+    //    Cookie::queue('cookie_for_js', 'can you read me?', 99999999);
+    //    print_r(Cookie::get('cookie_for_js'));exit;
         $articles_res = Article::select('rec_id as id','title')->orderBy('sort', 'desc')->take(10)->get()->toArray();
         $base_res = Base::whereIn('type', array(self::banner_type , self::style_type))->orderBy('sort', 'desc')->get()->toArray();
         $banner_list = $case_list = array();
@@ -314,10 +316,12 @@ class MainController extends Controller
 
     public function access(){
         $ip = get_real_ip();
+        if(in_array($ip , array('180.168.183.186'))) return 'admin';
         $url = $_REQUEST['url'];
-        $data = array('url'=>$url,'ip'=>$ip,'create_time'=>date('Y-m-d H:i:s'));
+        $ip_address = get_ip_local($ip);
+        $data = array('url'=>$url,'ip'=>$ip,'ip_address'=>$ip_address,'create_time'=>date('Y-m-d H:i:s'));
         Access::insert($data);
-        echo 'success';
+        return 'success';
     }
 
 }

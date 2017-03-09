@@ -414,3 +414,7 @@ i.glyphicon{
     right: 11px !important;
     margin-top:0 !important;
 }
+#e_remark{
+    max-width:680px;
+    min-width: 680px;
+}

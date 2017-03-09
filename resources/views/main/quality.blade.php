@@ -1,4 +1,4 @@
-@extends('retrofit')
+@extends('main.retrofit')
 
 @section('tab-content')
     <div class="f-content quality">

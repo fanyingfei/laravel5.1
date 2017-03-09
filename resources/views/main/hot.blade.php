@@ -1,4 +1,4 @@
-@extends('floor')
+@extends('main.floor')
 
 @section('floor-info')
     <ul class="tab-list tab-menu">

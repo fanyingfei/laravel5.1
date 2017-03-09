@@ -1,4 +1,4 @@
-@extends('main')
+@extends('main.main')
 
 @section('content')
     <div class="events-bg crumb-bg">
