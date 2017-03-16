@@ -7,6 +7,10 @@
                 <input type="text" class="form-control" id="e_title" value="{{ $info['title'] }}">
             </div>
             <div  class="form-group">
+                <label>别名：</label>
+                <input type="text" class="form-control" id="e_alias_name" value="{{ $info['alias_name'] }}">
+             </div>
+            <div  class="form-group">
                 <label>类型：</label>
                 <select class="form-control" id="e_type">
                     <option @if ( $info['type'] == 0 ) selected @endif value="0">请选择</option>
@@ -64,6 +68,7 @@ $(function(){
     $('.submit').click(function(){
         var id = $('#e_id').val();
         var title = $('#e_title').val();
+        var alias_name = $('#e_alias_name').val();
         var sort = $('#e_sort').val();
         var type = $('#e_type').val();
         var keywords = $('#e_keywords').val();
@@ -72,9 +77,13 @@ $(function(){
         var title_img = $('#e_title_img').val();
         var content = $(document.getElementById('myiframe').contentWindow.document.body).html();
         var token = $('#token').val();
+        if(alias_name == '' || title == ''){
+            alert('请填写完整信息');
+            return false;
+        }
         $.ajax({
             url:'/admin/save',
-            data:{'title':title,'type':type,'sort':sort,'keywords':keywords,'description':description,'create_time':create_time,'title_img':title_img,'content':content,'create_time':create_time,'id':id,'t':'event'},
+            data:{'title':title,'alias_name':alias_name,'type':type,'sort':sort,'keywords':keywords,'description':description,'create_time':create_time,'title_img':title_img,'content':content,'create_time':create_time,'id':id,'t':'event'},
             type:'post',
             dataType:'json',
             headers:{'X-CSRF-TOKEN':token},

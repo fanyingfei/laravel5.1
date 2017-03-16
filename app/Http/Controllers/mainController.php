@@ -31,8 +31,8 @@ class MainController extends Controller
     {
     //    Cookie::queue('cookie_for_js', 'can you read me?', 99999999);
     //    print_r(Cookie::get('cookie_for_js'));exit;
-        $articles_res = Article::select('rec_id as id','title')->orderBy('sort', 'desc')->take(10)->get()->toArray();
-        $base_res = Base::whereIn('type', array(self::banner_type , self::style_type))->orderBy('sort', 'desc')->get()->toArray();
+        $articles_res = Article::select('alias_name as id','title')->orderBy('sort', 'desc')->take(10)->get()->toArray();
+        $base_res = Base::whereIn('type', array(self::banner_type , self::style_type))->where('is_delete',0)->orderBy('sort', 'desc')->get()->toArray();
         $banner_list = $case_list = array();
         foreach($base_res as $row){
             if(empty($row['img_url'])) continue;
@@ -45,9 +45,9 @@ class MainController extends Controller
         }
 
         $data['body'] = 'home';
-        $data['title'] = '上海洵直装饰_墙面刷新_二手房翻新_旧墙翻新';
+        $data['title'] = '上海洵直装饰_墙面刷新_室内翻新_一站式翻新服务';
         $data['nav_title'] = '官网首页';
-        $data['keywords'] = '洵直，翻新，刷新，装饰，旧墙翻新';
+        $data['keywords'] = '洵直，室内翻新，旧墙刷新，室内装饰，旧墙翻新';
         $data['description'] = '';
         $data['case_list'] = $case_list;
         $data['article_list'] = $articles_res;
@@ -56,9 +56,9 @@ class MainController extends Controller
     }
 
     public function about($name=''){
-        $name_list = array('bsk'=>'预约查询','qua'=>'质保查询','faq'=>'常见问题');
+        $name_list = array('bsk'=>'预约查询_上海洵直装饰','qua'=>'质保查询_上海洵直装饰','faq'=>'常见问题_上海洵直装饰');
         $data['body'] = 'about';
-        $data['title'] = empty($name_list[$name]) ? '关于我们' : $name_list[$name];
+        $data['title'] = empty($name_list[$name]) ? '关于我们_上海洵直装饰' : $name_list[$name];
         $data['nav_title'] = empty($name_list[$name]) ? '关于我们' : $name_list[$name];
         $data['curr'] =$name;
         $data['keywords'] = '';
@@ -91,10 +91,10 @@ class MainController extends Controller
 
         if(empty($type)){
             $total_count = Article::count();
-            $list_res = Article::select('rec_id as id','title','title_img','create_time')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            $list_res = Article::select('alias_name as id','title','title_img','create_time')->orderBy('rec_id', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }else{
             $total_count = Article::where('type', $type)->count();
-            $list_res = Article::select('rec_id as id','title','title_img','create_time')->where('type', $type)->orderBy('create_time', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
+            $list_res = Article::select('alias_name as id','title','title_img','create_time')->where('type', $type)->orderBy('create_time', 'desc')->skip($p*$limit)->take($limit)->get()->toArray();
         }
         foreach($list_res as &$row){
             $row['create_time'] = substr($row['create_time'],0,10);
@@ -109,9 +109,9 @@ class MainController extends Controller
         return $data;
     }
 
-    public function show($id){
-        $id = intval($id);
-        $result = Article::where("rec_id",$id)->first();
+    public function show($name){
+        $alias_name = trim($name);
+        $result = Article::where("alias_name",$alias_name)->first();
         $result['create_time'] = substr($result['create_time'],0,10);
 
         $data['body'] = 'events';

@@ -24,6 +24,13 @@
             </div>
         @endif
         <div  class="form-group">
+            <label>是否删除：</label>
+            <select class="form-control" id="e_is_delete">
+                <option @if ( $info['is_delete'] == 0 ) selected @endif value="0">否</option>
+                <option @if ( $info['is_delete'] == 1 ) selected @endif value="1">是</option>
+            </select>
+        </div>
+        <div  class="form-group">
             <input type="hidden" id="e_id" value="{{ $info['rec_id'] }}">
             <button class="submit">保存</button>
         </div>
@@ -38,11 +45,12 @@ $(function(){
         var id = $('#e_id').val();
         var sort = $('#e_sort').val();
         var url = $('#e_url').val();
+        var is_delete = $('#e_is_delete').val();
         var img_url = $('#e_img_url').val();
         var token = $('#token').val();
         $.ajax({
             url:'/admin/save',
-            data:{'name':name,'sort':sort,'img_url':img_url,'url':url,'id':id,'t':'base'},
+            data:{'name':name,'sort':sort,'is_delete':is_delete,'img_url':img_url,'url':url,'id':id,'t':'base'},
             type:'post',
             dataType:'json',
             headers:{'X-CSRF-TOKEN':token},

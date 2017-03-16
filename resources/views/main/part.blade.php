@@ -51,8 +51,8 @@
             <h2 class="jpfc">精品辅材 · 放心无忧</h2>
             <p>材料自主化，个性最大化<br>包含人工辅料，自主采购主材</p>
             <div class="qjgw">
-                <h2>清洁归位 · 两年质保</h2>
-                <p>完全不用您动用，给您一个焕然一新的家<br>并为您提供两年质保。质保信息<a target="_blank" href="/about/qua">「查询地址」</a></p>
+                <h2>清洁归位 · 质量保障</h2>
+                <p>完全不用您动用，给您一个焕然一新的家<br>并为您提供质量保障。质保信息<a target="_blank" href="/about/qua">「查询地址」</a></p>
             </div>
         </div>
         <div class="part-step-img"><img src="http://ww4.sinaimg.cn/mw690/ce768b7ajw1f8g36g44zdj20j60vy43b.jpg"></div>

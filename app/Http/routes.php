@@ -18,7 +18,7 @@ Route::get('/access', 'MainController@access');
 Route::get('/events/{p?}', 'MainController@events')->where('p', '[0-9]+');
 Route::get('/information/{p?}', 'MainController@information')->where('p', '[0-9]+');
 
-Route::get('/show/{id}', 'MainController@show');
+Route::get('/show/{name}', 'MainController@show');
 
 Route::get('/about/{name?}',  'MainController@about');
 Route::post('/data/query','MainController@data_query');

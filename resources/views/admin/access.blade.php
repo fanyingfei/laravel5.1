@@ -3,6 +3,8 @@
 @section('content')
     <div class="table-toolbar">
         <button class="btn btn-op" id="remove" data-url="/admin/delete?t=access">Delete</button>
+        <input style="float:left;margin-right:10px;" id="laydate" placeholder="选择日期" class="form-control laydate-icon" onclick="laydate()">
+        <button class="btn btn-op" id="sel_time">确定</button>
     </div>
     <table id="table"
            data-toggle="table"
@@ -26,4 +28,19 @@
         </tr>
         </thead>
     </table>
+@stop
+@section('script')
+<script type="text/javascript" src="/laydate/laydate.js"></script>
+<script>
+$(function(){
+    $("#sel_time").click(function(){
+        var time = $("#laydate").val();
+        if(time == ''){
+            alert('请选择时间');
+            return false;
+        }
+        $("#table").bootstrapTable('refresh', {url: '/admin/list?t=access&time='+time});
+    });
+});
+</script>
 @stop

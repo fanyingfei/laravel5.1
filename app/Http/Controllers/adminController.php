@@ -99,6 +99,7 @@ class AdminController extends Controller
             $data['total'] = Base::count();
             $data['rows'] = Base::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
             foreach($data['rows'] as &$v){
+                $v['is_delete'] = empty($v['is_delete']) ? '否' : '是';
                 $v['op'] = '<a class="edit-btn" href="/admin/edit?t=base&id='.$v['rec_id'].'">编辑</a>';
                 if($v['type'] == self::banner_type) $v['type'] = '轮播';
                 elseif($v['type'] == self::style_type) $v['type'] = '风格';
@@ -155,8 +156,15 @@ class AdminController extends Controller
             }
         }elseif($t == 'access'){
             $order = 'desc';
-            $data['total'] = Access::count();
-            $data['rows'] = Access::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
+            if(empty($_REQUEST['time'])){
+                $data['total'] = Access::count();
+                $data['rows'] = Access::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
+            }else{
+                $start_time = $_REQUEST['time'];
+                $end_time = date('Y-m-d',strtotime("$start_time + 1day"));
+                $data['total'] = Access::where('create_time', '>=',$start_time)->where('create_time', '<',$end_time)->count();
+                $data['rows'] = Access::where('create_time', '>=',$start_time)->where('create_time', '<',$end_time)->skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();
+            }
             foreach($data['rows'] as $key=>&$v){
                 $v['is_crawler'] = empty($v['is_crawler']) ? '否' : '是';
             }
@@ -184,7 +192,7 @@ class AdminController extends Controller
                 $result = Fitment::where("rec_id",$id)->first();
                 $result['img_list'] = Image::where("rec_id",$id)->orderBy('sort', 'desc')->get()->toArray();
             }else{
-                $result = array('rec_id'=>0,'name'=>'','style'=>0,'house'=>0,'area'=>0,'price'=>'','img_list'=>array());
+                $result = array('rec_id'=>0,'name'=>'','style'=>0,'house'=>0,'is_delete'=>0,'area'=>0,'price'=>'','img_list'=>array());
             }
         }elseif($t == 'retrofit'){
             if($id) $result = Retrofit::where("rec_id",$id)->first();
@@ -195,7 +203,7 @@ class AdminController extends Controller
             else $result = array('rec_id'=>0,'name'=>'','type'=>'0','img_url'=>'');
         }elseif($t == 'event'){
             if($id) $result = Article::where("rec_id",$id)->first();
-            else $result = array('rec_id'=>0,'title'=>'','type'=>0,'sort'=>0,'title_img'=>'','keywords'=>'','description'=>'','create_time'=>date('Y-m-d H:i:s'),'content'=>'');
+            else $result = array('rec_id'=>0,'title'=>'','alias_name'=>'','type'=>0,'sort'=>0,'title_img'=>'','keywords'=>'','description'=>'','create_time'=>date('Y-m-d H:i:s'),'content'=>'');
         }elseif($t == 'bespeak'){
             if($id) $result = Bespeak::where("rec_id",$id)->first();
             else $result = array('rec_id'=>0,'name'=>'','type'=>0,'mobile'=>'','address'=>'','remark'=>'','keep_time'=>'','create_time'=>date('Y-m-d H:i:s'),'year'=>0);
@@ -236,6 +244,7 @@ class AdminController extends Controller
         if($t == 'base'){
             $data['name'] = trim($_REQUEST['name']);
             $data['sort'] = trim($_REQUEST['sort']);
+            $data['is_delete'] = intval($_REQUEST['is_delete']);
             $data['url'] = empty($_REQUEST['url']) ? '' : trim($_REQUEST['url']);
             $data['img_url'] = empty($_REQUEST['img_url']) ? '' : trim($_REQUEST['img_url']);
             if(empty($id)) splash('error','参数有误');
@@ -263,6 +272,8 @@ class AdminController extends Controller
             else $res = Floor::where('rec_id', $id)->update($data);
         }elseif($t == 'event'){
             $data['title'] = trim($_REQUEST['title']);
+            $data['alias_name'] = trim($_REQUEST['alias_name']);
+            if(empty($data['alias_name'])) splash('error','请填写完整信息');
             $data['type'] = intval($_REQUEST['type']);
             $data['sort'] = intval($_REQUEST['sort']);
             $data['keywords'] = trim($_REQUEST['keywords']);

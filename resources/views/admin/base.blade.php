@@ -26,6 +26,7 @@
             <th data-field="img_url">图片</th>
             <th data-field="url">跳转链接</th>
             <th data-field="create_time">时间</th>
+            <th data-field="is_delete">是否删除</th>
             <th data-field="op">操作</th>
         </tr>
         </thead>

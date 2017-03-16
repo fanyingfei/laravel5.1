@@ -37,7 +37,7 @@
     </div>
     <div class="footer">
         <p>
-            <span>免费服务热线：13052057882</span>
+            <span>免费预约电话：13052057882</span>
             <span>客服QQ：<a rel="external nofollow" target="_blank" href="http://wpa.qq.com/msgrd?uin=605022496&site=qq&menu=yes">605022496</a></span>
             <span>工作时间：周一至周日 09:00-22:00</span>
         </p>

@@ -20,6 +20,7 @@
             <th data-field="state" data-checkbox="true"></th>
             <th data-sortable="true" data-field="rec_id">ID</th>
             <th data-field="title">标题</th>
+            <th data-field="alias_name">别名</th>
             <th data-sortable="true" data-field="type">类型</th>
             <th data-sortable="true" data-field="sort">权重</th>
             <th data-field="keywords">关键词</th>
