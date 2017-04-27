@@ -11,7 +11,7 @@
             <input type="text" class="form-control" id="e_mobile" value="{{ $info['mobile'] }}">
         </div>
         <div  class="form-group">
-            <label>类型：</label>
+            <label>状态：</label>
             <select class="form-control" id="e_type">
                 @foreach ($data['bespeak_type'] as $key=>$row)
                     <option @if ( $info['type'] == $key ) selected @endif value="{{ $key }}">{{ $row }}</option>

@@ -117,7 +117,7 @@
         height: undefined,
         undefinedText: '-',
         sortName: undefined,
-        sortOrder: 'asc',
+        sortOrder: 'desc',
         striped: false,
         columns: [],
         data: [],

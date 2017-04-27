@@ -119,7 +119,7 @@ function bespeak(){
     html += '<div class="bespeak-row"><div>手机</div><div><input class="b-mobile" type="text" maxlength="11" ></div></div>';
     html += '<div class="bespeak-row"><div>地址</div><div><input class="b-address" type="text" ></div></div>';
     html += '<div class="bespeak-row"><div>留言</div><div><textarea class="b-remark" type="text" ></textarea></div></div>';
-    html += '<div class="bespeak-row"><div></div><div><div class="bespeak-submit">马上预约</div></div><a onclick="query_bsk()" class="query-bespeak">已经预约？立即查询</a></div>';
+    html += '<div class="bespeak-row"><div></div><div><a onclick="query_bsk()" class="query-bespeak">已经预约？立即查询</a><div class="bespeak-submit">马上预约</div></div></div>';
     $('.modal-bg').html(html);
     $('.modal-bg').show();
 }

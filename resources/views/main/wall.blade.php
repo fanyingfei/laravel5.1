@@ -6,7 +6,7 @@
         <li><a href="#1" class="curr">服务简介</a></li>
         <li><a href="#2">服务流程</a></li>
         <li><a href="#3">服务价格</a></li>
-        <li><a href="#4">案例分享</a></li>
+        <li><a href="#4">效果展示</a></li>
     </ul>
 @stop
 

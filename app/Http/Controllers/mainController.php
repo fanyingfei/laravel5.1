@@ -48,7 +48,7 @@ class MainController extends Controller
         $data['title'] = '上海洵直装饰_墙面刷新_室内翻新_一站式翻新服务';
         $data['nav_title'] = '官网首页';
         $data['keywords'] = '洵直，室内翻新，旧墙刷新，室内装饰，旧墙翻新';
-        $data['description'] = '';
+        $data['description'] = '洵直装饰，一站式翻新服务，涵盖卫生间翻新改造、厨房翻新改造、墙面粉刷翻新、局部改造、整体装修、室内外装饰、防水补漏、维修安装等一系列的房修项目，提供个性化、专业化的服务。';
         $data['case_list'] = $case_list;
         $data['article_list'] = $articles_res;
         $data['banner_list'] = $banner_list;
@@ -316,7 +316,7 @@ class MainController extends Controller
 
     public function access(){
         $ip = get_real_ip();
-        if(in_array($ip , array('180.168.183.186'))) return 'admin';
+        if(in_array($ip , array('180.168.183.186','116.236.190.58','112.64.216.122','180.168.202.42','140.207.223.191'))) return 'admin';
         $url = $_REQUEST['url'];
         $ip_address = get_ip_local($ip);
         $iscrawler = isCrawler();

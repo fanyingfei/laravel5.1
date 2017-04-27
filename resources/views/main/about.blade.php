@@ -19,7 +19,6 @@
                     <p> 洵直室内翻新服务主要以住宅、公寓、办公、商业、酒店、学校、医院等场所的施工，历史成交量已达千户之多，受到大家的一致好评。
                     一套套用心的服务，装满一户户幸福的笑容，一次次专业的施工，绘成一张张行业的名片，洵直室内翻新服务凭其近几年的诚信服务一步一个脚印走向辉煌，获得大众的认可。
                     </p>
-                    <div id="MyMap"></div>
                     <p><strong>服务项目</strong></p>
                     <p>1、涂料粉刷、墙面翻新、高档楼盘外墙涂料<br>
                        2、二手房简装、厨卫翻新、水电安装<br>
@@ -29,13 +28,11 @@
                        6、居家装饰、别墅、店铺装修、办公房装饰、学校厂房、中西式餐饮等精装修
                     </p>
                 </div>
-                <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
-                <script type="text/javascript" src="/js/baidumap.js"></script>
             @elseif ( $data['curr'] == 'bsk')
                 <h2>预约查询</h2>
                 <div class="query">
                     <p><input class="q-mobile" type="text" maxlength="11" placeholder="手机号码"><span data-type="all" class="p-sub">查询</span></p>
-                    <div class="result-list"><p><strong>例：</strong><span>姓名：王先生</span><span>预约时间：2016-10-05</span><span>地址：浦东新区张江***</span></p></div>
+                    <div class="result-list"><p><strong>例：</strong><span>姓名：王先生</span><span>预约日期：2016-10-05</span><span>地址：浦东新区张江***</span></p></div>
                 </div>
             @elseif ( $data['curr'] == 'qua')
                 <h2>质保查询</h2>
@@ -68,7 +65,7 @@
                     </div>
                     <div class="faq-row">
                         <p class="q">刷新后墙面出现问题如何处理？<span>+</span></p>
-                        <p class="a">我们的服务涂料辅料均为业界最高质量标准，施工人员经过严格的考核认证，因此您的墙面质量有充分的保证。<br>为确保您的放心，施工完成后，墙面服务最长两年的保修服务！</p>
+                        <p class="a">我们的服务涂料辅料均为业界最高质量标准，施工人员经过严格的考核认证，因此您的墙面质量有充分的保证。<br>为确保您的放心，施工完成后，墙面服务最长两年的保修服务！可以通过<a target="_blank" href="/about/qua">「质保查询」</a>来查询您的质保信息</p>
                     </div>
                 </div>
             @endif

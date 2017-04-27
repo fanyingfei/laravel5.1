@@ -92,7 +92,7 @@ class AdminController extends Controller
         $limit = empty($_REQUEST['limit']) ? 10 : $_REQUEST['limit'];
         $offset = empty($_REQUEST['order']) ? 0 : $_REQUEST['offset'];
         $sort = empty($_REQUEST['sort']) ? 'rec_id' : $_REQUEST['sort'];
-        $order = empty($_REQUEST['order']) ? 'asc' : $_REQUEST['order'];
+        $order = empty($_REQUEST['order']) ? 'desc' : $_REQUEST['order'];
 
         $t = $_REQUEST['t'];
         if($t == 'base'){
@@ -155,7 +155,6 @@ class AdminController extends Controller
                 $v['op'] = '<a class="edit-btn" href="/admin/edit?t=bespeak&id='.$v['rec_id'].'">编辑</a>';
             }
         }elseif($t == 'access'){
-            $order = 'desc';
             if(empty($_REQUEST['time'])){
                 $data['total'] = Access::count();
                 $data['rows'] = Access::skip($offset)->take($limit)->orderBy($sort, $order)->get()->toArray();

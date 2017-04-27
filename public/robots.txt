@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: http:www.xunzhizs.com/sitemap.xml
